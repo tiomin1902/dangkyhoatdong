@@ -1,279 +1,1398 @@
+```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Đăng ký tham gia hoạt động</title>
 
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;padding:30px 0;min-height:100vh;
- display:flex;justify-content:center;align-items:center;
- font-family:"Times New Roman",serif;
- background:linear-gradient(#0009,#0009),
- url("https://media.apag.edu.vn/Image/023ced82-d60e-9622-cc13-0ce98d1cef93/2025/10/3/Hinh-anh-Phan-hieu-c2f3e4f995.jpg") center/cover fixed
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
 }
-.container{
- width:90%;max-width:700px;padding:40px 35px;
- background:linear-gradient(135deg,#fffdf7,#f4ecd8);
- border:2px solid #b8860b;border-radius:8px;
- box-shadow:0 0 0 5px #fffc,0 0 0 7px #b8860b,0 15px 40px #000b
+
+html {
+    margin: 0;
+    padding: 0;
 }
-h2{
- margin:0 0 20px;text-align:center;color:#8b0000;
- font-size:26px;line-height:1.4;border-bottom:2px dashed #b8860b;
- padding-bottom:15px
+
+body {
+    margin: 0;
+    padding: 30px 0;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "Times New Roman", Times, serif;
+
+    background:
+        linear-gradient(rgba(0,0,0,0.60), rgba(0,0,0,0.60)),
+        url("https://media.apag.edu.vn/Image/023ced82-d60e-9622-cc13-0ce98d1cef93/2025/10/3/Hinh-anh-Phan-hieu-c2f3e4f995.jpg")
+        center center / cover fixed;
 }
-.form-group{margin-bottom:20px}
-label{
- display:block;margin-bottom:8px;font-weight:bold;
- color:#333;font-size:16px;letter-spacing:1px
+
+
+/* =========================================================
+   KHUNG CHÍNH
+========================================================= */
+
+.container {
+    width: 90%;
+    max-width: 700px;
+
+    padding: 40px 35px;
+
+    background: linear-gradient(
+        135deg,
+        #fffdf7,
+        #f4ecd8
+    );
+
+    border: 2px solid #b8860b;
+    border-radius: 8px;
+
+    box-shadow:
+        0 0 0 5px rgba(255,255,255,0.95),
+        0 0 0 7px #b8860b,
+        0 15px 40px rgba(0,0,0,0.70);
 }
-input{
- width:100%;padding:12px;border:1px solid #b8860b;
- background:#fffaf0;border-radius:3px;font:16px "Times New Roman"
+
+
+/* =========================================================
+   TIÊU ĐỀ
+========================================================= */
+
+h2 {
+    margin: 0 0 20px;
+
+    text-align: center;
+
+    color: #8b0000;
+
+    font-size: 26px;
+    line-height: 1.4;
+
+    border-bottom: 2px dashed #b8860b;
+
+    padding-bottom: 15px;
 }
-input:focus{outline:none;border-color:#8b0000}
-button{
- width:100%;padding:15px;background:linear-gradient(#d4af37,#b8860b);
- color:white;border:1px solid #8b6508;border-radius:4px;
- cursor:pointer;font: bold 18px "Times New Roman";
- letter-spacing:2px
+
+
+/* =========================================================
+   THÔNG TIN TRẠNG THÁI
+========================================================= */
+
+.info-box {
+    margin-bottom: 25px;
+    padding: 15px 10px;
+
+    text-align: center;
+
+    background: rgba(184,134,11,0.10);
+
+    border: 1px solid #b8860b;
+    border-radius: 5px;
+
+    font-size: 17px;
+    line-height: 1.6;
 }
-button:disabled{background:#ccc;border-color:#999;color:#666;cursor:not-allowed}
-.message{text-align:center;font-weight:bold;font-size:18px;margin-top:20px}
-.error{color:#8b0000}.success{color:#006400}
-.info-box{
- margin-bottom:25px;padding:15px 10px;text-align:center;
- background:#b8860b1a;border:1px solid #b8860b;
- border-radius:5px;font-size:17px;line-height:1.6
+
+
+/* =========================================================
+   COUNTDOWN
+========================================================= */
+
+.countdown {
+    display: inline-block;
+
+    margin-top: 12px;
+    padding: 8px 20px;
+
+    background: #fffaf0;
+
+    color: #8b0000;
+
+    border: 2px dotted #b8860b;
+
+    border-radius: 30px;
+
+    font-weight: bold;
+
+    font-size: 17px;
 }
-.countdown{
- display:inline-block;margin-top:12px;padding:8px 20px;
- background:#fffaf0;color:#8b0000;border:2px dotted #b8860b;
- border-radius:30px;font-weight:bold
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-group {
+    margin-bottom: 20px;
 }
-.registered-box{
- margin-top:25px;padding:18px;background:#fffaf0f2;
- border:1px solid #b8860b;border-radius:6px
+
+label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: bold;
+
+    color: #333;
+
+    font-size: 16px;
+
+    letter-spacing: 1px;
 }
-.registered-title{
- text-align:center;color:#8b0000;font-weight:bold;
- padding-bottom:10px;border-bottom:1px dashed #b8860b
+
+input {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #b8860b;
+
+    background: #fffaf0;
+
+    border-radius: 3px;
+
+    font: 16px "Times New Roman", Times, serif;
 }
-.registered-count{text-align:center;color:#666;font-size:14px;margin:10px}
-.registered-list{max-height:260px;overflow:auto;font-size:14px}
-.table-row{
- display:grid;grid-template-columns:45px 1.6fr 1fr 1.3fr;
- gap:8px;padding:10px 5px;border-bottom:1px solid #b8860b33
+
+input:focus {
+    outline: none;
+
+    border-color: #8b0000;
+
+    box-shadow: 0 0 0 2px rgba(139,0,0,0.08);
 }
-.table-head{font-weight:bold;color:#8b0000;background:#b8860b14;border-bottom:2px solid #b8860b}
-.table-row>div{word-break:break-word}
-.empty-list,.loading-list{text-align:center;color:#777;padding:10px}
-@media(max-width:600px){
- .container{width:94%;padding:30px 20px}
- h2{font-size:22px}
- .registered-list{min-width:550px}
+
+input:disabled {
+    background: #eeeeee;
+
+    color: #777;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+button {
+    width: 100%;
+
+    padding: 15px;
+
+    background: linear-gradient(
+        #d4af37,
+        #b8860b
+    );
+
+    color: white;
+
+    border: 1px solid #8b6508;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    font: bold 18px "Times New Roman", Times, serif;
+
+    letter-spacing: 2px;
+}
+
+button:hover:not(:disabled) {
+    background: linear-gradient(
+        #e1c04b,
+        #c99a16
+    );
+}
+
+button:disabled {
+    background: #cccccc;
+
+    border-color: #999999;
+
+    color: #666666;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.message {
+    text-align: center;
+
+    font-weight: bold;
+
+    font-size: 18px;
+
+    margin-top: 20px;
+
+    line-height: 1.5;
+}
+
+.error {
+    color: #8b0000;
+}
+
+.success {
+    color: #006400;
+}
+
+
+/* =========================================================
+   DANH SÁCH ĐĂNG KÝ
+========================================================= */
+
+.registered-box {
+    margin-top: 25px;
+
+    padding: 18px;
+
+    background: rgba(255,250,240,0.95);
+
+    border: 1px solid #b8860b;
+
+    border-radius: 6px;
+}
+
+.registered-title {
+    text-align: center;
+
+    color: #8b0000;
+
+    font-weight: bold;
+
+    padding-bottom: 10px;
+
+    border-bottom: 1px dashed #b8860b;
+}
+
+.registered-count {
+    text-align: center;
+
+    color: #666;
+
+    font-size: 14px;
+
+    margin: 10px;
+}
+
+.registered-list {
+    max-height: 260px;
+
+    overflow: auto;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   BẢNG
+========================================================= */
+
+.table-row {
+    display: grid;
+
+    grid-template-columns:
+        45px
+        1.6fr
+        1fr
+        1.3fr;
+
+    gap: 8px;
+
+    padding: 10px 5px;
+
+    border-bottom: 1px solid rgba(184,134,11,0.20);
+}
+
+.table-head {
+    font-weight: bold;
+
+    color: #8b0000;
+
+    background: rgba(184,134,11,0.08);
+
+    border-bottom: 2px solid #b8860b;
+}
+
+.table-row > div {
+    word-break: break-word;
+}
+
+.empty-list,
+.loading-list {
+    text-align: center;
+
+    color: #777;
+
+    padding: 10px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 20px 0;
+    }
+
+    .container {
+        width: 94%;
+
+        padding: 30px 20px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    .registered-list {
+        overflow-x: auto;
+    }
+
+    .table-row {
+        min-width: 550px;
+    }
 }
 </style>
+
 </head>
+
 
 <body>
 
 <div class="container">
 
-<h2>ĐĂNG KÝ THAM GIA HOẠT ĐỘNG<br>CHI ĐOÀN 2505QLNH</h2>
+    <!-- =====================================================
+         TIÊU ĐỀ
+    ====================================================== -->
 
-<div class="info-box" id="statusInfo">Đang kiểm tra hệ thống...</div>
+    <h2>
+        ĐĂNG KÝ THAM GIA HOẠT ĐỘNG
+        <br>
+        CHI ĐOÀN 2505QLNH
+    </h2>
 
-<form id="registrationForm">
- <div class="form-group">
-  <label>Họ và tên:</label>
-  <input type="text" id="fullName" placeholder="Vui lòng nhập họ và tên" required disabled>
- </div>
 
- <div class="form-group">
-  <label>Mã số sinh viên:</label>
-  <input type="text" id="studentId" placeholder="Vui lòng nhập mã số sinh viên" required disabled>
- </div>
+    <!-- =====================================================
+         TRẠNG THÁI HỆ THỐNG
+    ====================================================== -->
 
- <button id="submitBtn" disabled>Xác Nhận Đăng Ký</button>
-</form>
+    <div
+        class="info-box"
+        id="statusInfo"
+    >
+        Đang kiểm tra hệ thống...
+    </div>
 
-<div id="message" class="message"></div>
 
-<div class="registered-box">
- <div class="registered-title">DANH SÁCH ĐÃ ĐĂNG KÝ THÀNH CÔNG</div>
- <div id="registeredCount" class="registered-count">Đang cập nhật...</div>
- <div id="registeredList" class="registered-list">Đang tải danh sách...</div>
+    <!-- =====================================================
+         FORM ĐĂNG KÝ
+    ====================================================== -->
+
+    <form id="registrationForm">
+
+        <div class="form-group">
+
+            <label for="fullName">
+                Họ và tên:
+            </label>
+
+            <input
+                type="text"
+                id="fullName"
+                placeholder="Vui lòng nhập họ và tên"
+                autocomplete="name"
+                required
+                disabled
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="studentId">
+                Mã số sinh viên:
+            </label>
+
+            <input
+                type="text"
+                id="studentId"
+                placeholder="Vui lòng nhập mã số sinh viên"
+                autocomplete="off"
+                required
+                disabled
+            >
+
+        </div>
+
+
+        <button
+            type="submit"
+            id="submitBtn"
+            disabled
+        >
+            XÁC NHẬN ĐĂNG KÝ
+        </button>
+
+    </form>
+
+
+    <!-- =====================================================
+         THÔNG BÁO
+    ====================================================== -->
+
+    <div
+        id="message"
+        class="message"
+    ></div>
+
+
+    <!-- =====================================================
+         DANH SÁCH ĐÃ ĐĂNG KÝ
+    ====================================================== -->
+
+    <div class="registered-box">
+
+        <div class="registered-title">
+            DANH SÁCH ĐÃ ĐĂNG KÝ THÀNH CÔNG
+        </div>
+
+        <div
+            id="registeredCount"
+            class="registered-count"
+        >
+            Đang cập nhật...
+        </div>
+
+        <div
+            id="registeredList"
+            class="registered-list"
+        >
+            <div class="loading-list">
+                Đang tải danh sách...
+            </div>
+        </div>
+
+    </div>
+
 </div>
 
-</div>
 
 <script>
 
-/* ===== CHỈ CẦN SỬA 3 DÒNG NÀY ===== */
-
-const SCRIPT_URL="https://script.google.com/macros/s/AKfycbw47YRZPh9w-SLci-ll0_bumZiIbqOUUO0w_cshvZx5Glo_DIi3tWPXa7iGCQYspapY/exec";
-
-const MAX_PEOPLE=5;
-
-const START_TIME=new Date("2026-10-07T23:45:00").getTime();
-
-const EVENT_ID="HoatDong_08";
+/* =========================================================
+   =========================================================
+   CẤU HÌNH HOẠT ĐỘNG
+   =========================================================
+   CHỈ CẦN SỬA 4 DÒNG NÀY KHI TẠO HOẠT ĐỘNG MỚI
+   ========================================================= */
 
 
-/* ===== HỆ THỐNG ===== */
+/*
+   1. LINK GOOGLE APPS SCRIPT
+*/
 
-const $=id=>document.getElementById(id),
-form=$("registrationForm"),
-name=$("fullName"),
-student=$("studentId"),
-btn=$("submitBtn"),
-msg=$("message"),
-status=$("statusInfo"),
-list=$("registeredList"),
-count=$("registeredCount");
-
-let registered=0,full=false;
-let hasRegistered=localStorage.getItem(EVENT_ID)==="true";
+const SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbw47YRZPh9w-SLci-ll0_bumZiIbqOUUO0w_cshvZx5Glo_DIi3tWPXa7iGCQYspapY/exec";
 
 
-function renderStatus(){
+/*
+   2. SỐ LƯỢNG NGƯỜI TỐI ĐA
+*/
 
- if(hasRegistered){
-  name.disabled=student.disabled=btn.disabled=true;
-  status.innerHTML='<b class="success">BẠN ĐÃ ĐĂNG KÝ THÀNH CÔNG</b><br>Mỗi người chỉ được đăng ký 1 lần.';
-  return;
- }
+const MAX_PEOPLE = 5;
 
- let now=Date.now();
 
- if(now<START_TIME){
-  name.disabled=student.disabled=btn.disabled=true;
-  let d=START_TIME-now;
-  let h=Math.floor(d/3600000),
-      m=Math.floor(d%3600000/60000),
-      s=Math.floor(d%60000/1000);
+/*
+   3. THỜI GIAN MỞ ĐĂNG KÝ
 
-  status.innerHTML=`<b class="error">CHƯA MỞ ĐĂNG KÝ</b><br>
-  Hệ thống mở lúc: ${new Date(START_TIME).toLocaleString("vi-VN")}
-  <br><div class="countdown">⏳ Còn ${h} giờ ${m} phút ${s} giây</div>`;
-  return;
- }
+   Định dạng:
 
- if(full||registered>=MAX_PEOPLE){
-  name.disabled=student.disabled=btn.disabled=true;
-  status.innerHTML=`<b class="error">ĐÃ ĐÓNG ĐĂNG KÝ</b><br>Sự kiện đã đủ ${MAX_PEOPLE} sinh viên.`;
-  return;
- }
+   YYYY-MM-DDTHH:MM:SS
 
- name.disabled=student.disabled=btn.disabled=false;
- status.innerHTML=`<b>Đang mở đăng ký</b><br>Đã ghi nhận: ${registered}/${MAX_PEOPLE} sinh viên`;
+   Ví dụ:
+
+   07/10/2026 lúc 23:45
+
+   =
+
+   2026-10-07T23:45:00
+*/
+
+const START_TIME_STRING =
+    "2026-10-07T23:45:00";
+
+
+/*
+   4. MÃ HOẠT ĐỘNG
+
+   MỖI HOẠT ĐỘNG PHẢI CÓ MÃ RIÊNG.
+
+   Ví dụ:
+
+   HoatDong_01
+   HoatDong_02
+   HoatDong_03
+
+   KHÔNG dùng trùng mã.
+*/
+
+const EVENT_ID =
+    "HoatDong_08";
+
+
+/* =========================================================
+   XỬ LÝ THỜI GIAN
+========================================================= */
+
+const START_TIME =
+    new Date(START_TIME_STRING).getTime();
+
+
+/* =========================================================
+   LẤY ELEMENT
+========================================================= */
+
+const form =
+    document.getElementById("registrationForm");
+
+const nameInput =
+    document.getElementById("fullName");
+
+const studentInput =
+    document.getElementById("studentId");
+
+const submitButton =
+    document.getElementById("submitBtn");
+
+const message =
+    document.getElementById("message");
+
+const statusInfo =
+    document.getElementById("statusInfo");
+
+const registeredList =
+    document.getElementById("registeredList");
+
+const registeredCount =
+    document.getElementById("registeredCount");
+
+
+/* =========================================================
+   BIẾN HỆ THỐNG
+========================================================= */
+
+let registered = 0;
+
+let isFull = false;
+
+let isLoading = false;
+
+
+/*
+   KEY RIÊNG CHO TỪNG HOẠT ĐỘNG.
+
+   Ví dụ:
+
+   HoatDong_08_registered
+
+   Khi đổi sang HoatDong_09:
+
+   HoatDong_09_registered
+
+   => Không bị hoạt động cũ khóa nhầm.
+*/
+
+const LOCAL_STORAGE_KEY =
+    EVENT_ID + "_registered";
+
+
+/*
+   Kiểm tra người này đã đăng ký trên
+   trình duyệt hiện tại hay chưa.
+*/
+
+let hasRegistered =
+    localStorage.getItem(LOCAL_STORAGE_KEY) === "true";
+
+
+/* =========================================================
+   HÀM FORMAT THỜI GIAN
+========================================================= */
+
+function formatTime(milliseconds) {
+
+    if (milliseconds <= 0) {
+        return {
+            hours: 0,
+            minutes: 0,
+            seconds: 0
+        };
+    }
+
+    const hours =
+        Math.floor(milliseconds / 3600000);
+
+    const minutes =
+        Math.floor(
+            (milliseconds % 3600000) / 60000
+        );
+
+    const seconds =
+        Math.floor(
+            (milliseconds % 60000) / 1000
+        );
+
+    return {
+        hours,
+        minutes,
+        seconds
+    };
 }
 
 
-function escapeHtml(v){
- return String(v||"")
- .replace(/&/g,"&amp;").replace(/</g,"&lt;")
- .replace(/>/g,"&gt;").replace(/"/g,"&quot;")
- .replace(/'/g,"&#039;");
+/* =========================================================
+   HIỂN THỊ COUNTDOWN
+========================================================= */
+
+function renderCountdown() {
+
+    const now = Date.now();
+
+    const remaining =
+        START_TIME - now;
+
+
+    /*
+       Nếu chưa tới giờ
+    */
+
+    if (remaining > 0) {
+
+        const time =
+            formatTime(remaining);
+
+        statusInfo.innerHTML = `
+            <b class="error">
+                CHƯA MỞ ĐĂNG KÝ
+            </b>
+
+            <br>
+
+            Hệ thống sẽ mở lúc:
+
+            <br>
+
+            <b>
+                ${new Date(START_TIME).toLocaleString("vi-VN")}
+            </b>
+
+            <br>
+
+            <div class="countdown">
+                ⏳ Còn
+                ${time.hours} giờ
+                ${time.minutes} phút
+                ${time.seconds} giây
+            </div>
+        `;
+
+        nameInput.disabled = true;
+
+        studentInput.disabled = true;
+
+        submitButton.disabled = true;
+
+        return;
+    }
+
+
+    /*
+       Nếu đã tới giờ mở
+    */
+
+    if (!isFull && !hasRegistered) {
+
+        nameInput.disabled = false;
+
+        studentInput.disabled = false;
+
+        submitButton.disabled = false;
+
+        statusInfo.innerHTML = `
+            <b class="success">
+                ĐANG MỞ ĐĂNG KÝ
+            </b>
+
+            <br>
+
+            Đã ghi nhận:
+            <b>${registered}/${MAX_PEOPLE}</b>
+            sinh viên
+        `;
+
+        return;
+    }
 }
 
 
-function renderList(data){
+/* =========================================================
+   HIỂN THỊ TRẠNG THÁI
+========================================================= */
 
- if(!data.length){
-  count.textContent="Chưa có bạn nào đăng ký.";
-  list.innerHTML='<div class="empty-list">Danh sách hiện đang trống.</div>';
-  return;
- }
+function renderStatus() {
 
- count.textContent=`Đã có ${data.length}/${MAX_PEOPLE} bạn đăng ký`;
+    /*
+       ƯU TIÊN 1:
+       Người này đã đăng ký.
+    */
 
- list.innerHTML=`
- <div class="table-row table-head">
-  <div>STT</div><div>HỌ VÀ TÊN</div><div>MSSV</div><div>THỜI GIAN</div>
- </div>
- ${data.map((x,i)=>`
- <div class="table-row">
-  <div>${i+1}</div>
-  <div>${escapeHtml(x.name)}</div>
-  <div>${escapeHtml(x.studentId)}</div>
-  <div>${escapeHtml(x.time)}</div>
- </div>`).join("")}`;
+    if (hasRegistered) {
+
+        nameInput.disabled = true;
+
+        studentInput.disabled = true;
+
+        submitButton.disabled = true;
+
+        statusInfo.innerHTML = `
+            <b class="success">
+                BẠN ĐÃ ĐĂNG KÝ THÀNH CÔNG
+            </b>
+
+            <br>
+
+            Mỗi người chỉ được đăng ký 1 lần.
+        `;
+
+        return;
+    }
+
+
+    /*
+       ƯU TIÊN 2:
+       Chưa tới giờ.
+    */
+
+    if (Date.now() < START_TIME) {
+
+        renderCountdown();
+
+        return;
+    }
+
+
+    /*
+       ƯU TIÊN 3:
+       Đã đủ người.
+    */
+
+    if (isFull || registered >= MAX_PEOPLE) {
+
+        nameInput.disabled = true;
+
+        studentInput.disabled = true;
+
+        submitButton.disabled = true;
+
+        statusInfo.innerHTML = `
+            <b class="error">
+                ĐÃ ĐÓNG ĐĂNG KÝ
+            </b>
+
+            <br>
+
+            Sự kiện đã đủ
+            <b>${MAX_PEOPLE}</b>
+            sinh viên.
+        `;
+
+        return;
+    }
+
+
+    /*
+       ƯU TIÊN 4:
+       Đang mở.
+    */
+
+    nameInput.disabled = false;
+
+    studentInput.disabled = false;
+
+    submitButton.disabled = false;
+
+    statusInfo.innerHTML = `
+        <b class="success">
+            ĐANG MỞ ĐĂNG KÝ
+        </b>
+
+        <br>
+
+        Đã ghi nhận:
+        <b>${registered}/${MAX_PEOPLE}</b>
+        sinh viên
+    `;
 }
 
 
-function sync(){
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
 
- fetch(SCRIPT_URL+"?event="+encodeURIComponent(EVENT_ID)+"&t="+Date.now())
- .then(r=>r.json())
- .then(d=>{
-  registered=Number(d.count||0);
-  full=registered>=MAX_PEOPLE;
-  renderList(d.registrations||[]);
-  renderStatus();
- })
- .catch(()=>{
-  list.innerHTML='<div class="empty-list">Không thể tải danh sách.</div>';
- });
+function escapeHtml(value) {
+
+    return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
 
-form.addEventListener("submit",e=>{
+/* =========================================================
+   HIỂN THỊ DANH SÁCH
+========================================================= */
 
- e.preventDefault();
+function renderList(data) {
 
- btn.disabled=true;
- btn.textContent="Đang xử lý...";
- msg.textContent="";
+    /*
+       Nếu không có dữ liệu
+    */
 
- let data=new FormData();
+    if (!Array.isArray(data) || data.length === 0) {
 
- data.append("name",name.value.trim());
- data.append("studentId",student.value.trim());
- data.append("time",new Date().toLocaleString("vi-VN"));
- data.append("maxLimit",MAX_PEOPLE);
- data.append("event",EVENT_ID);
+        registeredCount.textContent =
+            "Chưa có bạn nào đăng ký.";
 
- fetch(SCRIPT_URL,{method:"POST",body:data})
- .then(r=>r.json())
- .then(d=>{
+        registeredList.innerHTML = `
+            <div class="empty-list">
+                Danh sách hiện đang trống.
+            </div>
+        `;
 
-  msg.textContent=d.message||"";
+        return;
+    }
 
-  if(d.status==="success"){
-   msg.className="message success";
-   localStorage.setItem(EVENT_ID,"true");
-   hasRegistered=true;
-   form.reset();
-   renderStatus();
-   sync();
-  }else{
-   msg.className="message error";
-   btn.disabled=false;
-   btn.textContent="Xác Nhận Đăng Ký";
-   sync();
-  }
 
- })
- .catch(()=>{
-  msg.textContent="Có lỗi xảy ra. Vui lòng thử lại.";
-  msg.className="message error";
-  btn.disabled=false;
-  btn.textContent="Xác Nhận Đăng Ký";
- });
-});
+    /*
+       Hiển thị số lượng
+    */
 
+    registeredCount.textContent =
+        `Đã có ${data.length}/${MAX_PEOPLE} bạn đăng ký`;
+
+
+    /*
+       Tạo bảng
+    */
+
+    registeredList.innerHTML = `
+
+        <div class="table-row table-head">
+
+            <div>
+                STT
+            </div>
+
+            <div>
+                HỌ VÀ TÊN
+            </div>
+
+            <div>
+                MSSV
+            </div>
+
+            <div>
+                THỜI GIAN
+            </div>
+
+        </div>
+
+
+        ${data.map((item, index) => `
+
+            <div class="table-row">
+
+                <div>
+                    ${index + 1}
+                </div>
+
+                <div>
+                    ${escapeHtml(item.name)}
+                </div>
+
+                <div>
+                    ${escapeHtml(item.studentId)}
+                </div>
+
+                <div>
+                    ${escapeHtml(item.time)}
+                </div>
+
+            </div>
+
+        `).join("")}
+    `;
+}
+
+
+/* =========================================================
+   ĐỒNG BỘ GOOGLE SHEETS
+========================================================= */
+
+function sync() {
+
+    /*
+       Tránh gọi quá nhiều request cùng lúc.
+    */
+
+    if (isLoading) {
+        return;
+    }
+
+    isLoading = true;
+
+
+    /*
+       URL:
+
+       SCRIPT_URL
+       +
+       ?event=HoatDong_08
+       +
+       timestamp chống cache
+    */
+
+    const url =
+        SCRIPT_URL
+        + "?event="
+        + encodeURIComponent(EVENT_ID)
+        + "&t="
+        + Date.now();
+
+
+    fetch(url)
+
+        .then(response => {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "HTTP error: " +
+                    response.status
+                );
+            }
+
+            return response.json();
+        })
+
+        .then(data => {
+
+            /*
+               Số người đã đăng ký
+            */
+
+            registered =
+                Number(data.count || 0);
+
+
+            /*
+               Kiểm tra đủ người
+            */
+
+            isFull =
+                registered >= MAX_PEOPLE;
+
+
+            /*
+               Hiển thị danh sách
+            */
+
+            renderList(
+                data.registrations || []
+            );
+
+
+            /*
+               Hiển thị trạng thái
+            */
+
+            renderStatus();
+        })
+
+        .catch(error => {
+
+            console.error(
+                "SYNC ERROR:",
+                error
+            );
+
+            registeredList.innerHTML = `
+                <div class="empty-list">
+                    Không thể tải danh sách.
+                    <br>
+                    Vui lòng thử tải lại trang.
+                </div>
+            `;
+
+        })
+
+        .finally(() => {
+
+            isLoading = false;
+
+        });
+}
+
+
+/* =========================================================
+   XỬ LÝ ĐĂNG KÝ
+========================================================= */
+
+form.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        /*
+           Không cho gửi nếu chưa tới giờ.
+        */
+
+        if (Date.now() < START_TIME) {
+
+            message.textContent =
+                "Chưa đến giờ mở đăng ký.";
+
+            message.className =
+                "message error";
+
+            renderStatus();
+
+            return;
+        }
+
+
+        /*
+           Không cho gửi nếu đủ người.
+        */
+
+        if (registered >= MAX_PEOPLE) {
+
+            message.textContent =
+                "Hoạt động đã đủ số lượng đăng ký.";
+
+            message.className =
+                "message error";
+
+            renderStatus();
+
+            return;
+        }
+
+
+        /*
+           Không cho gửi nếu trình duyệt
+           đã ghi nhận người này đăng ký.
+        */
+
+        if (hasRegistered) {
+
+            message.textContent =
+                "Bạn đã đăng ký hoạt động này rồi.";
+
+            message.className =
+                "message error";
+
+            renderStatus();
+
+            return;
+        }
+
+
+        /*
+           Lấy dữ liệu
+        */
+
+        const fullName =
+            nameInput.value.trim();
+
+        const studentId =
+            studentInput.value.trim();
+
+
+        /*
+           Kiểm tra họ tên
+        */
+
+        if (!fullName) {
+
+            message.textContent =
+                "Vui lòng nhập họ và tên.";
+
+            message.className =
+                "message error";
+
+            nameInput.focus();
+
+            return;
+        }
+
+
+        /*
+           Kiểm tra MSSV
+        */
+
+        if (!studentId) {
+
+            message.textContent =
+                "Vui lòng nhập mã số sinh viên.";
+
+            message.className =
+                "message error";
+
+            studentInput.focus();
+
+            return;
+        }
+
+
+        /*
+           Khóa nút trong lúc gửi.
+        */
+
+        submitButton.disabled = true;
+
+        submitButton.textContent =
+            "ĐANG XỬ LÝ...";
+
+        message.textContent = "";
+
+
+        /*
+           Tạo FormData
+        */
+
+        const formData =
+            new FormData();
+
+
+        formData.append(
+            "name",
+            fullName
+        );
+
+        formData.append(
+            "studentId",
+            studentId
+        );
+
+        formData.append(
+            "time",
+            new Date().toLocaleString("vi-VN")
+        );
+
+        formData.append(
+            "maxLimit",
+            MAX_PEOPLE
+        );
+
+        formData.append(
+            "event",
+            EVENT_ID
+        );
+
+
+        /*
+           Gửi sang Google Apps Script
+        */
+
+        fetch(
+            SCRIPT_URL,
+            {
+                method: "POST",
+                body: formData
+            }
+        )
+
+        .then(response => {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "HTTP error: " +
+                    response.status
+                );
+            }
+
+            return response.json();
+        })
+
+        .then(data => {
+
+            /*
+               Hiển thị thông báo
+            */
+
+            message.textContent =
+                data.message || "";
+
+
+            /*
+               Đăng ký thành công
+            */
+
+            if (data.status === "success") {
+
+                message.className =
+                    "message success";
+
+
+                /*
+                   LƯU RIÊNG CHO HOẠT ĐỘNG HIỆN TẠI.
+
+                   Ví dụ:
+
+                   HoatDong_08_registered=true
+
+                   Khi đổi sang:
+
+                   HoatDong_09
+
+                   sẽ không bị khóa.
+                */
+
+                localStorage.setItem(
+                    LOCAL_STORAGE_KEY,
+                    "true"
+                );
+
+
+                hasRegistered = true;
+
+
+                /*
+                   Xóa form
+                */
+
+                form.reset();
+
+
+                /*
+                   Cập nhật giao diện
+                */
+
+                renderStatus();
+
+
+                /*
+                   Cập nhật danh sách
+                */
+
+                sync();
+
+            }
+
+            /*
+               Đăng ký thất bại
+            */
+
+            else {
+
+                message.className =
+                    "message error";
+
+                submitButton.disabled = false;
+
+                submitButton.textContent =
+                    "XÁC NHẬN ĐĂNG KÝ";
+
+                sync();
+            }
+
+        })
+
+        .catch(error => {
+
+            console.error(
+                "REGISTER ERROR:",
+                error
+            );
+
+
+            message.textContent =
+                "Có lỗi xảy ra khi kết nối hệ thống. Vui lòng thử lại.";
+
+            message.className =
+                "message error";
+
+
+            submitButton.disabled = false;
+
+            submitButton.textContent =
+                "XÁC NHẬN ĐĂNG KÝ";
+        });
+
+    }
+);
+
+
+/* =========================================================
+   KHỞI ĐỘNG HỆ THỐNG
+========================================================= */
+
+
+/*
+   Đồng bộ danh sách ngay khi mở trang.
+*/
 
 sync();
 
-setInterval(renderStatus,1000);
-setInterval(sync,3000);
+
+/*
+   Cập nhật countdown mỗi giây.
+*/
+
+setInterval(
+    renderStatus,
+    1000
+);
+
+
+/*
+   Đồng bộ danh sách Google Sheets
+   mỗi 3 giây.
+*/
+
+setInterval(
+    sync,
+    3000
+);
 
 </script>
 
 </body>
 </html>
+```
