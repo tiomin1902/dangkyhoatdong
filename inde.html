@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đăng ký tham gia hoạt động</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+min-height:100vh;padding:30px 0;display:flex;justify-content:center;align-items:center;
+font-family:"Times New Roman",Times,serif;
+background:linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.60)),url("https://media.apag.edu.vn/Image/023ced82-d60e-9622-cc13-0ce98d1cef93/2025/10/3/Hinh-anh-Phan-hieu-c2f3e4f995.jpg") center/cover fixed
+}
+.container{
+width:90%;max-width:700px;padding:40px 35px;
+background:linear-gradient(135deg,#fffdf7,#f4ecd8);
+border:2px solid #b8860b;border-radius:8px;
+box-shadow:0 0 0 5px rgba(255,255,255,.95),0 0 0 7px #b8860b,0 15px 40px rgba(0,0,0,.70)
+}
+h2{
+margin:0 0 20px;padding-bottom:15px;text-align:center;color:#8b0000;
+font-size:26px;line-height:1.4;border-bottom:2px dashed #b8860b
+}
+.info-box{
+margin-bottom:25px;padding:15px 10px;text-align:center;
+background:rgba(184,134,11,.10);border:1px solid #b8860b;
+border-radius:5px;font-size:17px;line-height:1.6
+}
+.countdown{
+display:inline-block;margin-top:12px;padding:8px 20px;background:#fffaf0;
+color:#8b0000;border:2px dotted #b8860b;border-radius:30px;
+font-weight:bold;font-size:17px
+}
+.form-group{margin-bottom:20px}
+label{
+display:block;margin-bottom:8px;color:#333;font-size:16px;
+font-weight:bold;letter-spacing:1px
+}
+input{
+width:100%;padding:12px;background:#fffaf0;border:1px solid #b8860b;
+border-radius:3px;font:16px "Times New Roman",Times,serif
+}
+input:focus{
+outline:none;border-color:#8b0000;box-shadow:0 0 0 2px rgba(139,0,0,.08)
+}
+input:disabled{background:#eee;color:#777;cursor:not-allowed}
+button{
+width:100%;padding:15px;background:linear-gradient(#d4af37,#b8860b);
+color:white;border:1px solid #8b6508;border-radius:4px;cursor:pointer;
+font:bold 18px "Times New Roman",Times,serif;letter-spacing:2px
+}
+button:hover:not(:disabled){background:linear-gradient(#e1c04b,#c99a16)}
+button:disabled{background:#ccc;border-color:#999;color:#666;cursor:not-allowed}
+.message{
+margin-top:20px;text-align:center;font-size:18px;font-weight:bold;line-height:1.5
+}
+.success{color:#006400}
+.error{color:#8b0000}
+.registered-box{
+margin-top:25px;padding:18px;background:rgba(255,250,240,.95);
+border:1px solid #b8860b;border-radius:6px
+}
+.registered-title{
+padding-bottom:10px;text-align:center;color:#8b0000;font-weight:bold;
+border-bottom:1px dashed #b8860b
+}
+.registered-count{margin:10px;text-align:center;color:#666;font-size:14px}
+.registered-list{max-height:260px;overflow:auto;font-size:14px}
+.table-row{
+display:grid;grid-template-columns:45px 1.6fr 1fr 1.3fr;
+gap:8px;padding:10px 5px;border-bottom:1px solid rgba(184,134,11,.20)
+}
+.table-head{
+color:#8b0000;font-weight:bold;background:rgba(184,134,11,.08);
+border-bottom:2px solid #b8860b
+}
+.table-row>div{word-break:break-word}
+.empty-list,.loading-list{padding:10px;text-align:center;color:#777}
+@media(max-width:600px){
+body{padding:20px 0}
+.container{width:94%;padding:30px 20px}
+h2{font-size:22px}
+.registered-list{overflow-x:auto}
+.table-row{min-width:550px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h2>ĐĂNG KÝ THAM GIA HOẠT ĐỘNG<br>CHI ĐOÀN 2505QLNH</h2>
+
+<div class="info-box" id="statusInfo">Đang kiểm tra hệ thống...</div>
+
+<form id="registrationForm">
+<div class="form-group">
+<label for="fullName">Họ và tên:</label>
+<input type="text" id="fullName" placeholder="Vui lòng nhập họ và tên" required disabled>
+</div>
+
+<div class="form-group">
+<label for="studentId">Mã số sinh viên:</label>
+<input type="text" id="studentId" placeholder="Vui lòng nhập mã số sinh viên" required disabled>
+</div>
+
+<button type="submit" id="submitBtn" disabled>XÁC NHẬN ĐĂNG KÝ</button>
+</form>
+
+<div id="message" class="message"></div>
+
+<div class="registered-box">
+<div class="registered-title">DANH SÁCH ĐÃ ĐĂNG KÝ THÀNH CÔNG</div>
+<div id="registeredCount" class="registered-count">Đang cập nhật...</div>
+<div id="registeredList" class="registered-list">
+<div class="loading-list">Đang tải danh sách...</div>
+</div>
+</div>
+</div>
+
+<script>
+/* ===== CẤU HÌNH HOẠT ĐỘNG - CHỈ SỬA 4 DÒNG NÀY ===== */
+const SCRIPT_URL="https://script.google.com/macros/s/AKfycbw47YRZPh9w-SLci-ll0_bumZiIbqOUUO0w_cshvZx5Glo_DIi3tWPXa7iGCQYspapY/exec";
+const MAX_PEOPLE=5;
+const START_TIME_STRING="2026-10-07T23:45:00";
+const EVENT_ID="HoatDong_08";
+/* ===== HẾT PHẦN CẤU HÌNH ===== */
+
+const START_TIME=new Date(START_TIME_STRING).getTime();
+const form=document.getElementById("registrationForm");
+const nameInput=document.getElementById("fullName");
+const studentInput=document.getElementById("studentId");
+const submitButton=document.getElementById("submitBtn");
+const message=document.getElementById("message");
+const statusInfo=document.getElementById("statusInfo");
+const registeredList=document.getElementById("registeredList");
+const registeredCount=document.getElementById("registeredCount");
+
+let registered=0;
+let isFull=false;
+let isSyncing=false;
+
+function escapeHtml(value){
+return String(value||"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+}
+
+function updateCountdown(){
+if(Date.now()>=START_TIME){
+renderStatus();
+return;
+}
+
+const remaining=START_TIME-Date.now();
+const hours=Math.floor(remaining/3600000);
+const minutes=Math.floor((remaining%3600000)/60000);
+const seconds=Math.floor((remaining%60000)/1000);
+
+statusInfo.innerHTML=`
+<b class="error">CHƯA MỞ ĐĂNG KÝ</b><br>
+Hệ thống sẽ mở lúc:<br>
+<b>${new Date(START_TIME).toLocaleString("vi-VN")}</b><br>
+<div class="countdown">⏳ Còn ${hours} giờ ${minutes} phút ${seconds} giây</div>
+`;
+
+nameInput.disabled=true;
+studentInput.disabled=true;
+submitButton.disabled=true;
+}
+
+function renderStatus(){
+if(Date.now()<START_TIME){
+updateCountdown();
+return;
+}
+
+if(isFull||registered>=MAX_PEOPLE){
+nameInput.disabled=true;
+studentInput.disabled=true;
+submitButton.disabled=true;
+
+statusInfo.innerHTML=`
+<b class="error">ĐÃ ĐÓNG ĐĂNG KÝ</b><br>
+Sự kiện đã đủ <b>${MAX_PEOPLE}</b> sinh viên.
+`;
+return;
+}
+
+nameInput.disabled=false;
+studentInput.disabled=false;
+submitButton.disabled=false;
+
+statusInfo.innerHTML=`
+<b class="success">ĐANG MỞ ĐĂNG KÝ</b><br>
+Đã ghi nhận: <b>${registered}/${MAX_PEOPLE}</b> sinh viên.
+`;
+}
+
+function renderList(data){
+if(!Array.isArray(data)||data.length===0){
+registeredCount.textContent="Chưa có bạn nào đăng ký.";
+registeredList.innerHTML=`
+<div class="empty-list">Danh sách hiện đang trống.</div>
+`;
+return;
+}
+
+registeredCount.textContent=`Đã có ${data.length}/${MAX_PEOPLE} bạn đăng ký`;
+
+registeredList.innerHTML=`
+<div class="table-row table-head">
+<div>STT</div>
+<div>HỌ VÀ TÊN</div>
+<div>MSSV</div>
+<div>THỜI GIAN</div>
+</div>
+${data.map(function(item,index){
+return `
+<div class="table-row">
+<div>${index+1}</div>
+<div>${escapeHtml(item.name)}</div>
+<div>${escapeHtml(item.studentId)}</div>
+<div>${escapeHtml(item.time)}</div>
+</div>
+`;
+}).join("")}
+`;
+}
+
+function sync(){
+if(isSyncing)return;
+isSyncing=true;
+
+const url=SCRIPT_URL+"?event="+encodeURIComponent(EVENT_ID)+"&t="+Date.now();
+
+fetch(url)
+.then(function(response){
+if(!response.ok)throw new Error("HTTP "+response.status);
+return response.json();
+})
+.then(function(data){
+registered=Number(data.count||0);
+isFull=registered>=MAX_PEOPLE;
+renderList(data.registrations||[]);
+renderStatus();
+})
+.catch(function(error){
+console.error("SYNC ERROR:",error);
+registeredList.innerHTML=`
+<div class="empty-list">
+Không thể tải danh sách.<br>
+Vui lòng thử tải lại trang.
+</div>
+`;
+})
+.finally(function(){
+isSyncing=false;
+});
+}
+
+form.addEventListener("submit",function(event){
+event.preventDefault();
+
+if(Date.now()<START_TIME){
+message.textContent="Chưa đến giờ mở đăng ký.";
+message.className="message error";
+renderStatus();
+return;
+}
+
+if(registered>=MAX_PEOPLE){
+message.textContent="Hoạt động đã đủ số lượng đăng ký.";
+message.className="message error";
+renderStatus();
+return;
+}
+
+const fullName=nameInput.value.trim();
+const studentId=studentInput.value.trim();
+
+if(!fullName){
+message.textContent="Vui lòng nhập họ và tên.";
+message.className="message error";
+nameInput.focus();
+return;
+}
+
+if(!studentId){
+message.textContent="Vui lòng nhập mã số sinh viên.";
+message.className="message error";
+studentInput.focus();
+return;
+}
+
+submitButton.disabled=true;
+submitButton.textContent="ĐANG XỬ LÝ...";
+message.textContent="";
+
+const formData=new FormData();
+formData.append("name",fullName);
+formData.append("studentId",studentId);
+formData.append("time",new Date().toLocaleString("vi-VN"));
+formData.append("maxLimit",String(MAX_PEOPLE));
+formData.append("event",EVENT_ID);
+
+fetch(SCRIPT_URL,{
+method:"POST",
+body:formData
+})
+.then(function(response){
+if(!response.ok)throw new Error("HTTP "+response.status);
+return response.json();
+})
+.then(function(data){
+
+if(data.status==="success"){
+message.textContent=data.message||"Đăng ký thành công!";
+message.className="message success";
+form.reset();
+sync();
+return;
+}
+
+if(data.status==="duplicate"){
+message.textContent=data.message||"Mã số sinh viên này đã đăng ký hoạt động này trước đó.";
+message.className="message error";
+submitButton.disabled=false;
+submitButton.textContent="XÁC NHẬN ĐĂNG KÝ";
+sync();
+return;
+}
+
+if(data.status==="full"){
+message.textContent=data.message||"Đã đủ số lượng người đăng ký.";
+message.className="message error";
+submitButton.disabled=true;
+submitButton.textContent="ĐÃ ĐÓNG ĐĂNG KÝ";
+sync();
+return;
+}
+
+message.textContent=data.message||"Đăng ký không thành công.";
+message.className="message error";
+submitButton.disabled=false;
+submitButton.textContent="XÁC NHẬN ĐĂNG KÝ";
+sync();
+})
+.catch(function(error){
+console.error("REGISTER ERROR:",error);
+message.textContent="Không thể kết nối hệ thống. Vui lòng thử lại.";
+message.className="message error";
+submitButton.disabled=false;
+submitButton.textContent="XÁC NHẬN ĐĂNG KÝ";
+});
+});
+
+sync();
+
+setInterval(function(){
+if(Date.now()<START_TIME){
+updateCountdown();
+}else{
+renderStatus();
+}
+},1000);
+
+setInterval(sync,3000);
+</script>
+</body>
+</html>
