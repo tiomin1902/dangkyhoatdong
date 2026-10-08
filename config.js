@@ -3,14 +3,15 @@ const MAX_PEOPLE = 5;
 const START_TIME_STRING = "2026-10-08T15:20:00";
 const EVENT_ID = "HoatDong_18";
 
-const isRegistrationActive = false; // Đặt true để test hiển thị thông tin hoạt động
-const CLOSED_MESSAGE = "CHƯA CÓ HOẠT ĐỘNG ĐỂ ĐĂNG KÝ\nVui lòng quay lại sau";
+// Trạng thái hệ thống: true (mở đăng ký) | false (chưa có hoạt động)
+const isRegistrationActive = false; 
+const CLOSED_MESSAGE = "CHƯA CÓ HOẠT ĐỘNG ĐỂ ĐĂNG KÝ. Vui lòng quay lại sau.";
 
-// --- THÔNG TIN CHI TIẾT CỦA HOẠT ĐỘNG (Bạn có thể sửa trực tiếp ở đây) ---
+// Thông tin chi tiết hoạt động
 const eventDetails = {
     tenHoatDong: "Giải bóng đá Thanh niên Chi đoàn 2505QLNH",
     thoiGianDienRa: "08:00 sáng, Chủ nhật, ngày 18/10/2026",
     diaDiem: "Sân thể thao trung tâm trường",
     noiDung: "Giao lưu bóng đá mini chào mừng năm học mới, tăng cường tình đoàn kết giữa các đoàn viên trong Chi đoàn.",
-    luu Y: "Đoàn viên tham gia nhớ mang giày thể thao và có mặt đúng giờ quy định."
+    luuY: "Đoàn viên tham gia nhớ mang giày thể thao và có mặt đúng giờ quy định."
 };
