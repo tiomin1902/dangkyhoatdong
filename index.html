@@ -4,982 +4,172 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Đăng ký tham gia hoạt động</title>
-
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-
-:root{
-    --red:#720000;
-    --red2:#a90000;
-    --gold:#d4af37;
-    --gold2:#b8860b;
-    --cream:#fff8e6;
-    --text:#2b2118;
-}
-
-/* =========================================================
-   GIAO DIỆN CHUNG
-========================================================= */
-
-body{
-    min-height:100vh;
-    padding:30px 15px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family:"Times New Roman",Times,serif;
-    color:var(--text);
-    background:
-        linear-gradient(135deg,rgba(35,0,0,.88),rgba(95,12,12,.72),rgba(0,0,0,.88)),
-        url("https://media.apag.edu.vn/Image/023ced82-d60e-9622-cc13-0ce98d1cef93/2025/10/3/Hinh-anh-Phan-hieu-c2f3e4f995.jpg")
-        center/cover fixed;
-    position:relative;
-    overflow-x:hidden;
-}
-
-body:before,
-body:after{
-    content:"";
-    position:fixed;
-    border-radius:50%;
-    pointer-events:none;
-    filter:blur(30px);
-}
-
-body:before{
-    width:650px;
-    height:650px;
-    top:-280px;
-    left:-220px;
-    background:radial-gradient(circle,rgba(212,175,55,.25),transparent 68%);
-    animation:light1 11s ease-in-out infinite alternate;
-}
-
-body:after{
-    width:550px;
-    height:550px;
-    right:-230px;
-    bottom:-220px;
-    background:radial-gradient(circle,rgba(139,0,0,.38),transparent 68%);
-    animation:light2 13s ease-in-out infinite alternate;
-}
-
-@keyframes light1{
-    to{transform:translate(160px,130px) scale(1.2)}
-}
-
-@keyframes light2{
-    to{transform:translate(-130px,-110px) scale(1.25)}
-}
-
-/* =========================================================
-   COUNTDOWN
-========================================================= */
-
-.countdown-screen,
-.container{
-    width:100%;
-    max-width:760px;
-    border-radius:30px;
-    background:linear-gradient(135deg,rgba(255,255,255,.94),rgba(255,248,230,.90));
-    border:1px solid rgba(255,255,255,.8);
-    box-shadow:
-        0 35px 100px rgba(0,0,0,.58),
-        0 0 0 1px rgba(212,175,55,.35),
-        inset 0 1px 0 rgba(255,255,255,.95);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-    overflow:hidden;
-    position:relative;
-}
-
-.countdown-screen{
-    z-index:5;
-    min-height:650px;
-    padding:55px 40px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    animation:appear .9s cubic-bezier(.22,1,.36,1);
-}
-
-.countdown-screen:before,
-.container:before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:5px;
-    background:linear-gradient(90deg,#720000,#d4af37,#fff0a6,#d4af37,#720000);
-    background-size:250% 100%;
-    animation:gold 5s linear infinite;
-}
-
-.countdown-small-title{
-    margin-bottom:15px;
-    color:#9b792d;
-    font-size:14px;
-    font-weight:bold;
-    letter-spacing:4px;
-}
-
-.countdown-decoration,
-.header-decoration{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:13px;
-    margin-bottom:25px;
-}
-
-.countdown-decoration span,
-.header-decoration span{
-    display:block;
-    width:75px;
-    height:1px;
-    background:linear-gradient(90deg,transparent,#b8860b);
-}
-
-.countdown-decoration span:last-child,
-.header-decoration span:last-child{
-    background:linear-gradient(90deg,#b8860b,transparent);
-}
-
-.countdown-decoration b,
-.header-decoration b{
-    width:11px;
-    height:11px;
-    display:block;
-    transform:rotate(45deg);
-    background:var(--gold);
-    box-shadow:0 0 16px rgba(212,175,55,.65);
-}
-
-.countdown-title{
-    color:var(--red);
-    font-size:38px;
-    line-height:1.2;
-    letter-spacing:2px;
-    font-weight:bold;
-}
-
-.countdown-subtitle{
-    margin-top:13px;
-    color:#816b51;
-    font-size:16px;
-    letter-spacing:1px;
-}
-
-.countdown-clock{
-    margin-top:42px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:12px;
-}
-
-.time-unit{
-    min-width:125px;
-    padding:18px 14px 15px;
-    border-radius:18px;
-    background:linear-gradient(145deg,rgba(255,255,255,.95),rgba(255,247,219,.88));
-    border:1px solid rgba(184,134,11,.38);
-    box-shadow:
-        0 15px 35px rgba(90,40,0,.10),
-        inset 0 1px 0 rgba(255,255,255,.95);
-    animation:float 4s ease-in-out infinite;
-}
-
-.time-number{
-    display:block;
-    color:#790000;
-    font-size:48px;
-    line-height:1;
-    font-weight:bold;
-    letter-spacing:2px;
-}
-
-.time-label{
-    display:block;
-    margin-top:8px;
-    color:#967a4d;
-    font-size:11px;
-    font-weight:bold;
-    letter-spacing:2px;
-}
-
-.time-separator{
-    color:var(--gold2);
-    font-size:30px;
-    font-weight:bold;
-    animation:pulse 1s infinite;
-}
-
-.open-time{
-    margin-top:35px;
-    padding:13px 25px;
-    border-radius:50px;
-    background:rgba(139,0,0,.045);
-    border:1px solid rgba(184,134,11,.3);
-    color:#806c54;
-    font-size:14px;
-    line-height:1.6;
-}
-
-.open-time strong{
-    color:#790000;
-    font-size:16px;
-}
-
-.countdown-note{
-    margin-top:24px;
-    color:#9a8a76;
-    font-size:13px;
-    font-style:italic;
-}
-
-/* =========================================================
-   FORM
-========================================================= */
-
-.container{
-    z-index:2;
-    padding:45px;
-    display:none;
-}
-
-.container.show{
-    display:block;
-    animation:formAppear 1s cubic-bezier(.22,1,.36,1);
-}
-
-.header{
-    text-align:center;
-    margin-bottom:30px;
-}
-
-.header-decoration{
-    margin-bottom:15px;
-}
-
-.header-decoration span{
-    width:55px;
-}
-
-h2{
-    font-size:30px;
-    line-height:1.25;
-    letter-spacing:1.5px;
-    background:linear-gradient(135deg,#680000,#a00000 45%,#c28b12);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-}
-
-.subtitle{
-    margin-top:12px;
-    font-size:14px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    color:#8b6b3e;
-}
-
-.info-box{
-    position:relative;
-    margin-bottom:30px;
-    padding:22px 25px;
-    text-align:center;
-    border-radius:18px;
-    background:linear-gradient(135deg,rgba(139,0,0,.045),rgba(212,175,55,.1));
-    border:1px solid rgba(184,134,11,.35);
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.8),
-        0 10px 30px rgba(100,50,0,.06);
-    overflow:hidden;
-}
-
-.success{
-    color:#176b3a;
-    font-weight:bold;
-}
-
-.error{
-    color:#8b0000;
-    font-weight:bold;
-}
-
-.form-group{
-    margin-bottom:24px;
-    animation:soft .8s both;
-}
-
-.form-group:nth-child(2){
-    animation-delay:.1s;
-}
-
-label{
-    display:block;
-    margin-bottom:9px;
-    color:#5d4630;
-    font-size:15px;
-    font-weight:bold;
-    letter-spacing:.8px;
-}
-
-.input-wrap{
-    position:relative;
-}
-
-.input-icon{
-    position:absolute;
-    left:16px;
-    top:50%;
-    transform:translateY(-50%);
-    font-size:17px;
-    color:#a27b2a;
-    pointer-events:none;
-}
-
-input{
-    width:100%;
-    padding:16px 18px 16px 48px;
-    border-radius:13px;
-    border:1px solid rgba(184,134,11,.38);
-    background:rgba(255,255,255,.72);
-    color:#2b2118;
-    font:16px "Times New Roman",Times,serif;
-    outline:none;
-    transition:.3s;
-}
-
-input:focus{
-    background:#fff;
-    border-color:#8b0000;
-    transform:translateY(-2px);
-    box-shadow:
-        0 8px 25px rgba(139,0,0,.1),
-        0 0 0 4px rgba(139,0,0,.06);
-}
-
-input:disabled{
-    background:#eee;
-    color:#888;
-    cursor:not-allowed;
-    opacity:.7;
-}
-
-button{
-    position:relative;
-    width:100%;
-    margin-top:5px;
-    padding:17px 25px;
-    border:0;
-    border-radius:14px;
-    cursor:pointer;
-    overflow:hidden;
-    color:#fff;
-    font:bold 17px "Times New Roman",Times,serif;
-    letter-spacing:2px;
-    background:linear-gradient(135deg,#720000,#a90000 50%,#7a0000);
-    box-shadow:
-        0 12px 30px rgba(114,0,0,.28),
-        inset 0 1px 0 rgba(255,255,255,.22);
-    transition:.25s;
-}
-
-button:hover:not(:disabled){
-    transform:translateY(-3px);
-    box-shadow:0 18px 38px rgba(114,0,0,.36);
-    filter:brightness(1.08);
-}
-
-button:disabled{
-    background:linear-gradient(135deg,#aaa,#888);
-    box-shadow:none;
-    cursor:not-allowed;
-}
-
-.message{
-    min-height:25px;
-    margin-top:20px;
-    text-align:center;
-    font-size:17px;
-    font-weight:bold;
-    line-height:1.5;
-}
-
-/* =========================================================
-   DANH SÁCH
-========================================================= */
-
-.registered-box{
-    margin-top:32px;
-    padding:25px;
-    border-radius:20px;
-    background:linear-gradient(135deg,rgba(255,255,255,.76),rgba(255,249,232,.8));
-    border:1px solid rgba(184,134,11,.28);
-    box-shadow:
-        0 12px 35px rgba(80,40,0,.07),
-        inset 0 1px 0 rgba(255,255,255,.9);
-}
-
-.registered-title{
-    text-align:center;
-    padding-bottom:15px;
-    color:#7b0000;
-    font-size:17px;
-    font-weight:bold;
-    letter-spacing:1px;
-    border-bottom:1px solid rgba(184,134,11,.25);
-}
-
-.registered-count{
-    margin:15px 0;
-    text-align:center;
-    color:#8a7459;
-    font-size:14px;
-}
-
-.registered-list{
-    max-height:280px;
-    overflow:auto;
-    scrollbar-width:thin;
-}
-
-.table-row{
-    display:grid;
-    grid-template-columns:55px 1.6fr 1fr 1.3fr;
-    gap:10px;
-    padding:13px 10px;
-    align-items:center;
-    border-bottom:1px solid rgba(184,134,11,.12);
-}
-
-.table-head{
-    color:#7b0000;
-    font-weight:bold;
-    font-size:13px;
-    background:rgba(139,0,0,.05);
-    border-bottom:2px solid #c5a33b;
-    position:sticky;
-    top:0;
-    z-index:2;
-}
-
-.table-row>div{
-    word-break:break-word;
-}
-
-.empty-list,
-.loading-list{
-    padding:25px;
-    text-align:center;
-    color:#8f806e;
-    font-size:15px;
-}
-
-.footer-decoration{
-    text-align:center;
-    margin-top:28px;
-    color:#b18b35;
-    opacity:.65;
-    font-size:12px;
-    letter-spacing:2px;
-}
-
-/* =========================================================
-   ANIMATION
-========================================================= */
-
-@keyframes appear{
-    from{opacity:0;transform:translateY(35px) scale(.94)}
-    to{opacity:1;transform:none}
-}
-
-@keyframes formAppear{
-    from{opacity:0;transform:translateY(50px) scale(.94)}
-    to{opacity:1;transform:none}
-}
-
-@keyframes gold{
-    to{background-position:250% 50%}
-}
-
-@keyframes float{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-5px)}
-}
-
-@keyframes pulse{
-    0%,100%{opacity:.35}
-    50%{opacity:1}
-}
-
-@keyframes soft{
-    from{opacity:0;transform:translateY(15px)}
-    to{opacity:1;transform:none}
-}
-
-/* =========================================================
-   📱 GIAO DIỆN ĐIỆN THOẠI RIÊNG
-========================================================= */
-
+:root{--red:#720000;--red2:#a90000;--gold:#d4af37;--gold2:#b8860b;--cream:#fff8e6;--text:#2b2118}
+body{min-height:100vh;padding:30px 15px;display:flex;justify-content:center;align-items:center;font-family:"Times New Roman",Times,serif;color:var(--text);background:linear-gradient(135deg,rgba(35,0,0,.88),rgba(95,12,12,.72),rgba(0,0,0,.88)),url("https://media.apag.edu.vn/Image/023ced82-d60e-9622-cc13-0ce98d1cef93/2025/10/3/Hinh-anh-Phan-hieu-c2f3e4f995.jpg") center/cover fixed;position:relative;overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;border-radius:50%;pointer-events:none;filter:blur(30px)}
+body:before{width:650px;height:650px;top:-280px;left:-220px;background:radial-gradient(circle,rgba(212,175,55,.25),transparent 68%);animation:light1 11s ease-in-out infinite alternate}
+body:after{width:550px;height:550px;right:-230px;bottom:-220px;background:radial-gradient(circle,rgba(139,0,0,.38),transparent 68%);animation:light2 13s ease-in-out infinite alternate}
+@keyframes light1{to{transform:translate(160px,130px) scale(1.2)}}
+@keyframes light2{to{transform:translate(-130px,-110px) scale(1.25)}}
+.countdown-screen,.container{width:100%;max-width:760px;border-radius:30px;background:linear-gradient(135deg,rgba(255,255,255,.94),rgba(255,248,230,.9));border:1px solid rgba(255,255,255,.8);box-shadow:0 35px 100px rgba(0,0,0,.58),0 0 0 1px rgba(212,175,55,.35),inset 0 1px 0 rgba(255,255,255,.95);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);overflow:hidden;position:relative}
+.countdown-screen:before,.container:before{content:"";position:absolute;top:0;left:0;width:100%;height:5px;background:linear-gradient(90deg,#720000,#d4af37,#fff0a6,#d4af37,#720000);background-size:250% 100%;animation:gold 5s linear infinite}
+.countdown-screen{z-index:5;min-height:650px;padding:55px 40px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;animation:appear .9s cubic-bezier(.22,1,.36,1)}
+.countdown-small-title{margin-bottom:15px;color:#9b792d;font-size:14px;font-weight:bold;letter-spacing:4px}
+.countdown-decoration,.header-decoration{display:flex;align-items:center;justify-content:center;gap:13px;margin-bottom:25px}
+.countdown-decoration span,.header-decoration span{display:block;width:75px;height:1px;background:linear-gradient(90deg,transparent,#b8860b)}
+.countdown-decoration span:last-child,.header-decoration span:last-child{background:linear-gradient(90deg,#b8860b,transparent)}
+.countdown-decoration b,.header-decoration b{width:11px;height:11px;display:block;transform:rotate(45deg);background:var(--gold);box-shadow:0 0 16px rgba(212,175,55,.65)}
+.countdown-title{color:var(--red);font-size:38px;line-height:1.2;letter-spacing:2px;font-weight:bold}
+.countdown-subtitle{margin-top:13px;color:#816b51;font-size:16px;letter-spacing:1px}
+.countdown-clock{margin-top:42px;display:flex;align-items:center;justify-content:center;gap:12px}
+.time-unit{min-width:125px;padding:18px 14px 15px;border-radius:18px;background:linear-gradient(145deg,rgba(255,255,255,.95),rgba(255,247,219,.88));border:1px solid rgba(184,134,11,.38);box-shadow:0 15px 35px rgba(90,40,0,.1),inset 0 1px 0 rgba(255,255,255,.95);animation:float 4s ease-in-out infinite}
+.time-number{display:block;color:#790000;font-size:48px;line-height:1;font-weight:bold;letter-spacing:2px}
+.time-label{display:block;margin-top:8px;color:#967a4d;font-size:11px;font-weight:bold;letter-spacing:2px}
+.time-separator{color:var(--gold2);font-size:30px;font-weight:bold;animation:pulse 1s infinite}
+.open-time{margin-top:35px;padding:13px 25px;border-radius:50px;background:rgba(139,0,0,.045);border:1px solid rgba(184,134,11,.3);color:#806c54;font-size:14px;line-height:1.6}
+.open-time strong{color:#790000;font-size:16px}
+.countdown-note{margin-top:24px;color:#9a8a76;font-size:13px;font-style:italic}
+.container{z-index:2;padding:45px;display:none}
+.container.show{display:block;animation:formAppear 1s cubic-bezier(.22,1,.36,1)}
+.header{text-align:center;margin-bottom:30px}
+.header-decoration{margin-bottom:15px}
+.header-decoration span{width:55px}
+h2{font-size:30px;line-height:1.25;letter-spacing:1.5px;background:linear-gradient(135deg,#680000,#a00000 45%,#c28b12);-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{margin-top:12px;font-size:14px;letter-spacing:3px;text-transform:uppercase;color:#8b6b3e}
+.info-box{position:relative;margin-bottom:30px;padding:22px 25px;text-align:center;border-radius:18px;background:linear-gradient(135deg,rgba(139,0,0,.045),rgba(212,175,55,.1));border:1px solid rgba(184,134,11,.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 10px 30px rgba(100,50,0,.06);overflow:hidden}
+.success{color:#176b3a;font-weight:bold}
+.error{color:#8b0000;font-weight:bold}
+.form-group{margin-bottom:24px;animation:soft .8s both}
+.form-group:nth-child(2){animation-delay:.1s}
+label{display:block;margin-bottom:9px;color:#5d4630;font-size:15px;font-weight:bold;letter-spacing:.8px}
+.input-wrap{position:relative}
+.input-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:17px;color:#a27b2a;pointer-events:none}
+input{width:100%;padding:16px 18px 16px 48px;border-radius:13px;border:1px solid rgba(184,134,11,.38);background:rgba(255,255,255,.72);color:#2b2118;font:16px "Times New Roman",Times,serif;outline:none;transition:.3s}
+input:focus{background:#fff;border-color:#8b0000;transform:translateY(-2px);box-shadow:0 8px 25px rgba(139,0,0,.1),0 0 0 4px rgba(139,0,0,.06)}
+input:disabled{background:#eee;color:#888;cursor:not-allowed;opacity:.7}
+button{position:relative;width:100%;margin-top:5px;padding:17px 25px;border:0;border-radius:14px;cursor:pointer;overflow:hidden;color:#fff;font:bold 17px "Times New Roman",Times,serif;letter-spacing:2px;background:linear-gradient(135deg,#720000,#a90000 50%,#7a0000);box-shadow:0 12px 30px rgba(114,0,0,.28),inset 0 1px 0 rgba(255,255,255,.22);transition:.25s}
+button:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 18px 38px rgba(114,0,0,.36);filter:brightness(1.08)}
+button:disabled{background:linear-gradient(135deg,#aaa,#888);box-shadow:none;cursor:not-allowed}
+.message{min-height:25px;margin-top:20px;text-align:center;font-size:17px;font-weight:bold;line-height:1.5}
+.registered-box{margin-top:32px;padding:25px;border-radius:20px;background:linear-gradient(135deg,rgba(255,255,255,.76),rgba(255,249,232,.8));border:1px solid rgba(184,134,11,.28);box-shadow:0 12px 35px rgba(80,40,0,.07),inset 0 1px 0 rgba(255,255,255,.9)}
+.registered-title{text-align:center;padding-bottom:15px;color:#7b0000;font-size:17px;font-weight:bold;letter-spacing:1px;border-bottom:1px solid rgba(184,134,11,.25)}
+.registered-count{margin:15px 0;text-align:center;color:#8a7459;font-size:14px}
+.registered-list{max-height:280px;overflow:auto;scrollbar-width:thin}
+.table-row{display:grid;grid-template-columns:55px 1.6fr 1fr 1.3fr;gap:10px;padding:13px 10px;align-items:center;border-bottom:1px solid rgba(184,134,11,.12)}
+.table-head{color:#7b0000;font-weight:bold;font-size:13px;background:rgba(139,0,0,.05);border-bottom:2px solid #c5a33b;position:sticky;top:0;z-index:2}
+.table-row>div{word-break:break-word}
+.empty-list,.loading-list{padding:25px;text-align:center;color:#8f806e;font-size:15px}
+.footer-decoration{text-align:center;margin-top:28px;color:#b18b35;opacity:.65;font-size:12px;letter-spacing:2px}
+@keyframes appear{from{opacity:0;transform:translateY(35px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes formAppear{from{opacity:0;transform:translateY(50px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes gold{to{background-position:250% 50%}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+@keyframes soft{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
 @media(max-width:600px){
-
-    body{
-        min-height:100svh;
-        padding:12px;
-        align-items:center;
-        background:
-            linear-gradient(
-                160deg,
-                rgba(55,0,0,.82),
-                rgba(100,10,10,.72),
-                rgba(15,0,0,.90)
-            ),
-            url("https://media.apag.edu.vn/Image/023ced82-d60e-9622-cc13-0ce98d1cef93/2025/10/3/Hinh-anh-Phan-hieu-c2f3e4f995.jpg")
-            center center/cover no-repeat;
-        background-attachment:scroll;
-    }
-
-    body:before{
-        width:300px;
-        height:300px;
-        top:-100px;
-        left:-100px;
-        opacity:.7;
-    }
-
-    body:after{
-        width:280px;
-        height:280px;
-        right:-120px;
-        bottom:-100px;
-        opacity:.7;
-    }
-
-    .countdown-screen,
-    .container{
-        max-width:100%;
-        border-radius:24px;
-        box-shadow:
-            0 25px 60px rgba(0,0,0,.5),
-            0 0 0 1px rgba(212,175,55,.28),
-            inset 0 1px 0 rgba(255,255,255,.9);
-    }
-
-    /* COUNTDOWN MOBILE */
-
-    .countdown-screen{
-        min-height:calc(100svh - 24px);
-        padding:35px 18px;
-    }
-
-    .countdown-small-title{
-        font-size:10px;
-        letter-spacing:3px;
-        margin-bottom:13px;
-    }
-
-    .countdown-decoration{
-        margin-bottom:22px;
-        gap:9px;
-    }
-
-    .countdown-decoration span{
-        width:45px;
-    }
-
-    .countdown-decoration b{
-        width:9px;
-        height:9px;
-    }
-
-    .countdown-title{
-        font-size:27px;
-        letter-spacing:1px;
-    }
-
-    .countdown-subtitle{
-        margin-top:10px;
-        font-size:13px;
-        line-height:1.5;
-    }
-
-    .countdown-clock{
-        width:100%;
-        margin-top:34px;
-        gap:5px;
-    }
-
-    .time-unit{
-        flex:1;
-        min-width:0;
-        padding:17px 5px 13px;
-        border-radius:15px;
-    }
-
-    .time-number{
-        font-size:35px;
-        letter-spacing:1px;
-    }
-
-    .time-label{
-        margin-top:7px;
-        font-size:8px;
-        letter-spacing:1.5px;
-    }
-
-    .time-separator{
-        font-size:22px;
-    }
-
-    .open-time{
-        margin-top:30px;
-        padding:11px 16px;
-        font-size:11px;
-    }
-
-    .open-time strong{
-        font-size:14px;
-    }
-
-    .countdown-note{
-        max-width:270px;
-        margin-top:20px;
-        font-size:11px;
-        line-height:1.5;
-    }
-
-    /* FORM MOBILE */
-
-    .container{
-        padding:28px 18px;
-        margin:5px 0;
-    }
-
-    .header{
-        margin-bottom:24px;
-    }
-
-    .header-decoration{
-        margin-bottom:13px;
-        gap:8px;
-    }
-
-    .header-decoration span{
-        width:38px;
-    }
-
-    .header-decoration b{
-        width:8px;
-        height:8px;
-    }
-
-    h2{
-        font-size:23px;
-        line-height:1.3;
-        letter-spacing:.7px;
-    }
-
-    .subtitle{
-        margin-top:9px;
-        font-size:10px;
-        letter-spacing:2px;
-    }
-
-    .info-box{
-        margin-bottom:23px;
-        padding:17px 13px;
-        border-radius:15px;
-        font-size:14px;
-        line-height:1.6;
-    }
-
-    .form-group{
-        margin-bottom:19px;
-    }
-
-    label{
-        margin-bottom:7px;
-        font-size:14px;
-    }
-
-    input{
-        padding:15px 14px 15px 44px;
-        border-radius:12px;
-        font-size:16px;
-    }
-
-    .input-icon{
-        left:14px;
-    }
-
-    button{
-        margin-top:3px;
-        padding:16px 15px;
-        border-radius:12px;
-        font-size:15px;
-        letter-spacing:1.5px;
-    }
-
-    .message{
-        font-size:15px;
-        margin-top:16px;
-    }
-
-    /* DANH SÁCH MOBILE */
-
-    .registered-box{
-        margin-top:25px;
-        padding:17px 10px;
-        border-radius:17px;
-    }
-
-    .registered-title{
-        font-size:13px;
-        letter-spacing:.7px;
-        line-height:1.4;
-    }
-
-    .registered-count{
-        margin:12px 0;
-        font-size:12px;
-    }
-
-    .registered-list{
-        overflow-x:auto;
-        max-height:250px;
-    }
-
-    .table-row{
-        min-width:540px;
-        grid-template-columns:45px 1.5fr 1fr 1.2fr;
-        padding:11px 8px;
-        font-size:13px;
-    }
-
-    .table-head{
-        font-size:11px;
-    }
-
-    .footer-decoration{
-        margin-top:22px;
-        font-size:10px;
-    }
+body{min-height:100svh;padding:12px;align-items:center;background:linear-gradient(160deg,rgba(55,0,0,.82),rgba(100,10,10,.72),rgba(15,0,0,.9)),url("https://media.apag.edu.vn/Image/023ced82-d60e-9622-cc13-0ce98d1cef93/2025/10/3/Hinh-anh-Phan-hieu-c2f3e4f995.jpg") center center/cover no-repeat;background-attachment:scroll}
+body:before{width:300px;height:300px;top:-100px;left:-100px;opacity:.7}
+body:after{width:280px;height:280px;right:-120px;bottom:-100px;opacity:.7}
+.countdown-screen,.container{max-width:100%;border-radius:24px;box-shadow:0 25px 60px rgba(0,0,0,.5),0 0 0 1px rgba(212,175,55,.28),inset 0 1px 0 rgba(255,255,255,.9)}
+.countdown-screen{min-height:calc(100svh - 24px);padding:35px 18px}
+.countdown-small-title{font-size:10px;letter-spacing:3px;margin-bottom:13px}
+.countdown-decoration{margin-bottom:22px;gap:9px}
+.countdown-decoration span{width:45px}
+.countdown-decoration b{width:9px;height:9px}
+.countdown-title{font-size:27px;letter-spacing:1px}
+.countdown-subtitle{margin-top:10px;font-size:13px;line-height:1.5}
+.countdown-clock{width:100%;margin-top:34px;gap:5px}
+.time-unit{flex:1;min-width:0;padding:17px 5px 13px;border-radius:15px}
+.time-number{font-size:35px;letter-spacing:1px}
+.time-label{margin-top:7px;font-size:8px;letter-spacing:1.5px}
+.time-separator{font-size:22px}
+.open-time{margin-top:30px;padding:11px 16px;font-size:11px}
+.open-time strong{font-size:14px}
+.countdown-note{max-width:270px;margin-top:20px;font-size:11px;line-height:1.5}
+.container{padding:28px 18px;margin:5px 0}
+.header{margin-bottom:24px}
+.header-decoration{margin-bottom:13px;gap:8px}
+.header-decoration span{width:38px}
+.header-decoration b{width:8px;height:8px}
+h2{font-size:23px;line-height:1.3;letter-spacing:.7px}
+.subtitle{margin-top:9px;font-size:10px;letter-spacing:2px}
+.info-box{margin-bottom:23px;padding:17px 13px;border-radius:15px;font-size:14px;line-height:1.6}
+.form-group{margin-bottom:19px}
+label{margin-bottom:7px;font-size:14px}
+input{padding:15px 14px 15px 44px;border-radius:12px;font-size:16px}
+.input-icon{left:14px}
+button{margin-top:3px;padding:16px 15px;border-radius:12px;font-size:15px;letter-spacing:1.5px}
+.message{font-size:15px;margin-top:16px}
+.registered-box{margin-top:25px;padding:17px 10px;border-radius:17px}
+.registered-title{font-size:13px;letter-spacing:.7px;line-height:1.4}
+.registered-count{margin:12px 0;font-size:12px}
+.registered-list{overflow-x:auto;max-height:250px}
+.table-row{min-width:540px;grid-template-columns:45px 1.5fr 1fr 1.2fr;padding:11px 8px;font-size:13px}
+.table-head{font-size:11px}
+.footer-decoration{margin-top:22px;font-size:10px}
 }
-
-/* =========================================================
-   📲 ĐIỆN THOẠI RẤT NHỎ
-========================================================= */
-
 @media(max-width:380px){
-
-    .countdown-title{
-        font-size:24px;
-    }
-
-    .time-number{
-        font-size:30px;
-    }
-
-    .time-unit{
-        padding:14px 4px 11px;
-    }
-
-    .container{
-        padding:25px 15px;
-    }
-
-    h2{
-        font-size:21px;
-    }
+.countdown-title{font-size:24px}
+.time-number{font-size:30px}
+.time-unit{padding:14px 4px 11px}
+.container{padding:25px 15px}
+h2{font-size:21px}
 }
 </style>
 </head>
-
 <body>
-
-<!-- COUNTDOWN -->
-
 <div id="countdownScreen" class="countdown-screen">
-    <div class="countdown-small-title">CHI ĐOÀN 2505QLNH</div>
-
-    <div class="countdown-decoration">
-        <span></span><b></b><span></span>
-    </div>
-
-    <div class="countdown-title">ĐĂNG KÝ SẮP MỞ</div>
-
-    <div class="countdown-subtitle">
-        Hệ thống đăng ký sẽ chính thức mở
-    </div>
-
-    <div class="countdown-clock">
-        <div class="time-unit">
-            <span id="countHours" class="time-number">00</span>
-            <span class="time-label">GIỜ</span>
-        </div>
-
-        <div class="time-separator">:</div>
-
-        <div class="time-unit">
-            <span id="countMinutes" class="time-number">00</span>
-            <span class="time-label">PHÚT</span>
-        </div>
-
-        <div class="time-separator">:</div>
-
-        <div class="time-unit">
-            <span id="countSeconds" class="time-number">00</span>
-            <span class="time-label">GIÂY</span>
-        </div>
-    </div>
-
-    <div id="openTime" class="open-time">
-        MỞ ĐĂNG KÝ LÚC: <strong>--:--</strong>
-    </div>
-
-    <div class="countdown-note">
-        Vui lòng quay lại đúng thời gian để tham gia đăng ký.
-    </div>
+<div class="countdown-small-title">CHI ĐOÀN 2505QLNH</div>
+<div class="countdown-decoration"><span></span><b></b><span></span></div>
+<div class="countdown-title">ĐĂNG KÝ SẮP MỞ</div>
+<div class="countdown-subtitle">Hệ thống đăng ký sẽ chính thức mở</div>
+<div class="countdown-clock">
+<div class="time-unit"><span id="countHours" class="time-number">00</span><span class="time-label">GIỜ</span></div>
+<div class="time-separator">:</div>
+<div class="time-unit"><span id="countMinutes" class="time-number">00</span><span class="time-label">PHÚT</span></div>
+<div class="time-separator">:</div>
+<div class="time-unit"><span id="countSeconds" class="time-number">00</span><span class="time-label">GIÂY</span></div>
 </div>
-
-
-<!-- FORM -->
+<div id="openTime" class="open-time">MỞ ĐĂNG KÝ LÚC: <strong>--:--</strong></div>
+<div class="countdown-note">Vui lòng quay lại đúng thời gian để tham gia đăng ký.</div>
+</div>
 
 <div id="mainContainer" class="container">
-
-    <div class="header">
-
-        <div class="header-decoration">
-            <span></span><b></b><span></span>
-        </div>
-
-        <h2>
-            ĐĂNG KÝ THAM GIA HOẠT ĐỘNG<br>
-            CHI ĐOÀN 2505QLNH
-        </h2>
-
-        <div class="subtitle">
-            Hoạt động chi đoàn
-        </div>
-
-    </div>
-
-    <div class="info-box" id="statusInfo">
-        Đang kiểm tra hệ thống...
-    </div>
-
-    <form id="registrationForm">
-
-        <div class="form-group">
-
-            <label for="fullName">
-                Họ và tên
-            </label>
-
-            <div class="input-wrap">
-
-                <span class="input-icon">✦</span>
-
-                <input
-                    type="text"
-                    id="fullName"
-                    placeholder="Vui lòng nhập họ và tên"
-                    required
-                    disabled
-                >
-
-            </div>
-
-        </div>
-
-        <div class="form-group">
-
-            <label for="studentId">
-                Mã số sinh viên
-            </label>
-
-            <div class="input-wrap">
-
-                <span class="input-icon">✧</span>
-
-                <input
-                    type="text"
-                    id="studentId"
-                    placeholder="Vui lòng nhập mã số sinh viên"
-                    required
-                    disabled
-                >
-
-            </div>
-
-        </div>
-
-        <button
-            type="submit"
-            id="submitBtn"
-            disabled
-        >
-            XÁC NHẬN ĐĂNG KÝ
-        </button>
-
-    </form>
-
-    <div id="message" class="message"></div>
-
-    <div class="registered-box">
-
-        <div class="registered-title">
-            DANH SÁCH ĐÃ ĐĂNG KÝ THÀNH CÔNG
-        </div>
-
-        <div id="registeredCount" class="registered-count">
-            Đang cập nhật...
-        </div>
-
-        <div id="registeredList" class="registered-list">
-
-            <div class="loading-list">
-                Đang tải danh sách...
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="footer-decoration">
-        CHI ĐOÀN 2505QLNH
-    </div>
-
+<div class="header">
+<div class="header-decoration"><span></span><b></b><span></span></div>
+<h2>ĐĂNG KÝ THAM GIA HOẠT ĐỘNG<br>CHI ĐOÀN 2505QLNH</h2>
+<div class="subtitle">Hoạt động chi đoàn</div>
+</div>
+<div class="info-box" id="statusInfo">Đang kiểm tra hệ thống...</div>
+<form id="registrationForm">
+<div class="form-group">
+<label for="fullName">Họ và tên</label>
+<div class="input-wrap"><span class="input-icon">✦</span><input type="text" id="fullName" placeholder="Vui lòng nhập họ và tên" required disabled></div>
+</div>
+<div class="form-group">
+<label for="studentId">Mã số sinh viên</label>
+<div class="input-wrap"><span class="input-icon">✧</span><input type="text" id="studentId" placeholder="Vui lòng nhập mã số sinh viên" required disabled></div>
+</div>
+<button type="submit" id="submitBtn" disabled>XÁC NHẬN ĐĂNG KÝ</button>
+</form>
+<div id="message" class="message"></div>
+<div class="registered-box">
+<div class="registered-title">DANH SÁCH ĐÃ ĐĂNG KÝ THÀNH CÔNG</div>
+<div id="registeredCount" class="registered-count">Đang cập nhật...</div>
+<div id="registeredList" class="registered-list"><div class="loading-list">Đang tải danh sách...</div></div>
+</div>
+<div class="footer-decoration">CHI ĐOÀN 2505QLNH</div>
 </div>
 
-
 <script>
-
-/* =========================================================
-   ⚙️ CẤU HÌNH — CHỈ SỬA 4 DÒNG NÀY
-========================================================= */
-
 const SCRIPT_URL="https://script.google.com/macros/s/AKfycbw47YRZPh9w-SLci-ll0_bumZiIbqOUUO0w_cshvZx5Glo_DIi3tWPXa7iGCQYspapY/exec";
-
 const MAX_PEOPLE=2;
-
 const START_TIME_STRING="2026-10-08T14:10:00";
-
 const EVENT_ID="HoatDong_13";
 
-
-/* =========================================================
-   HỆ THỐNG
-========================================================= */
-
 const START_TIME=new Date(START_TIME_STRING).getTime();
-
 const countdownScreen=document.getElementById("countdownScreen");
 const mainContainer=document.getElementById("mainContainer");
 const countHours=document.getElementById("countHours");
@@ -995,438 +185,185 @@ const statusInfo=document.getElementById("statusInfo");
 const registeredList=document.getElementById("registeredList");
 const registeredCount=document.getElementById("registeredCount");
 
-let registered=0;
-let isFull=false;
-let isSyncing=false;
-let registrationOpened=false;
+let registered=0,isFull=false,isSyncing=false,registrationOpened=false;
 
-
-/* HIỂN THỊ GIỜ MỞ */
+const CACHE_KEY="registration_"+EVENT_ID;
 
 function showOpenTime(){
-
-    const d=new Date(START_TIME);
-
-    openTime.innerHTML=
-        `MỞ ĐĂNG KÝ LÚC:
-        <strong>
-        ${d.toLocaleTimeString("vi-VN",{hour:"2-digit",minute:"2-digit"})}
-        </strong>
-        • ${d.toLocaleDateString("vi-VN")}`;
+ const d=new Date(START_TIME);
+ openTime.innerHTML=`MỞ ĐĂNG KÝ LÚC: <strong>${d.toLocaleTimeString("vi-VN",{hour:"2-digit",minute:"2-digit"})}</strong> • ${d.toLocaleDateString("vi-VN")}`;
 }
-
-
-/* COUNTDOWN */
 
 function updateCountdown(){
-
-    const r=START_TIME-Date.now();
-
-    if(r<=0){
-        openRegistration();
-        return;
-    }
-
-    const h=Math.floor(r/3600000);
-    const m=Math.floor((r%3600000)/60000);
-    const s=Math.floor((r%60000)/1000);
-
-    countHours.textContent=String(h).padStart(2,"0");
-    countMinutes.textContent=String(m).padStart(2,"0");
-    countSeconds.textContent=String(s).padStart(2,"0");
+ const r=START_TIME-Date.now();
+ if(r<=0){openRegistration();return}
+ countHours.textContent=String(Math.floor(r/3600000)).padStart(2,"0");
+ countMinutes.textContent=String(Math.floor((r%3600000)/60000)).padStart(2,"0");
+ countSeconds.textContent=String(Math.floor((r%60000)/1000)).padStart(2,"0");
 }
-
-
-/* MỞ FORM */
 
 function openRegistration(){
-
-    if(registrationOpened)return;
-
-    registrationOpened=true;
-
-    countdownScreen.style.transition=
-        "opacity .7s ease,transform .7s ease";
-
-    countdownScreen.style.opacity="0";
-    countdownScreen.style.transform=
-        "translateY(-25px) scale(.96)";
-
-    setTimeout(()=>{
-
-        countdownScreen.style.display="none";
-
-        mainContainer.classList.add("show");
-
-        renderStatus();
-
-    },700);
+ if(registrationOpened)return;
+ registrationOpened=true;
+ countdownScreen.style.transition="opacity .7s ease,transform .7s ease";
+ countdownScreen.style.opacity="0";
+ countdownScreen.style.transform="translateY(-25px) scale(.96)";
+ setTimeout(()=>{
+  countdownScreen.style.display="none";
+  mainContainer.classList.add("show");
+  loadCache();
+  sync();
+ },700);
 }
-
-
-/* BẢO MẬT HTML */
 
 function escapeHtml(v){
-
-    return String(v||"")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+ return String(v||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
 }
-
-
-/* TRẠNG THÁI */
 
 function renderStatus(){
-
-    if(!registrationOpened)return;
-
-    if(isFull||registered>=MAX_PEOPLE){
-
-        nameInput.disabled=true;
-        studentInput.disabled=true;
-        submitButton.disabled=true;
-
-        statusInfo.innerHTML=
-            `<b class="error">
-            ĐÃ ĐÓNG ĐĂNG KÝ
-            </b>
-            <br>
-            Sự kiện đã đủ
-            <b>${MAX_PEOPLE}</b>
-            sinh viên.`;
-
-        return;
-    }
-
-    nameInput.disabled=false;
-    studentInput.disabled=false;
-    submitButton.disabled=false;
-
-    statusInfo.innerHTML=
-        `<b class="success">
-        ● ĐANG MỞ ĐĂNG KÝ
-        </b>
-        <br>
-        Đã ghi nhận:
-        <b>${registered}/${MAX_PEOPLE}</b>
-        sinh viên.`;
+ if(!registrationOpened)return;
+ if(isFull||registered>=MAX_PEOPLE){
+  nameInput.disabled=true;
+  studentInput.disabled=true;
+  submitButton.disabled=true;
+  submitButton.textContent="ĐÃ ĐÓNG ĐĂNG KÝ";
+  statusInfo.innerHTML=`<b class="error">ĐÃ ĐÓNG ĐĂNG KÝ</b><br>Sự kiện đã đủ <b>${MAX_PEOPLE}</b> sinh viên.`;
+  return;
+ }
+ nameInput.disabled=false;
+ studentInput.disabled=false;
+ submitButton.disabled=false;
+ submitButton.textContent="XÁC NHẬN ĐĂNG KÝ";
+ statusInfo.innerHTML=`<b class="success">● ĐANG MỞ ĐĂNG KÝ</b><br>Đã ghi nhận: <b>${registered}/${MAX_PEOPLE}</b> sinh viên.`;
 }
-
-
-/* DANH SÁCH */
 
 function renderList(data){
-
-    if(!Array.isArray(data)||!data.length){
-
-        registeredCount.textContent=
-            "Chưa có bạn nào đăng ký.";
-
-        registeredList.innerHTML=
-            '<div class="empty-list">Danh sách hiện đang trống.</div>';
-
-        return;
-    }
-
-    registeredCount.textContent=
-        `Đã có ${data.length}/${MAX_PEOPLE} bạn đăng ký`;
-
-    registeredList.innerHTML=`
-
-        <div class="table-row table-head">
-            <div>STT</div>
-            <div>HỌ VÀ TÊN</div>
-            <div>MSSV</div>
-            <div>THỜI GIAN</div>
-        </div>
-
-        ${data.map((item,i)=>`
-
-            <div class="table-row">
-                <div>${i+1}</div>
-                <div>${escapeHtml(item.name)}</div>
-                <div>${escapeHtml(item.studentId)}</div>
-                <div>${escapeHtml(item.time)}</div>
-            </div>
-
-        `).join("")}
-    `;
+ if(!Array.isArray(data)||!data.length){
+  registeredCount.textContent="Chưa có bạn nào đăng ký.";
+  registeredList.innerHTML='<div class="empty-list">Danh sách hiện đang trống.</div>';
+  return;
+ }
+ registeredCount.textContent=`Đã có ${data.length}/${MAX_PEOPLE} bạn đăng ký`;
+ registeredList.innerHTML=`<div class="table-row table-head"><div>STT</div><div>HỌ VÀ TÊN</div><div>MSSV</div><div>THỜI GIAN</div></div>${data.map((item,i)=>`<div class="table-row"><div>${i+1}</div><div>${escapeHtml(item.name)}</div><div>${escapeHtml(item.studentId)}</div><div>${escapeHtml(item.time)}</div></div>`).join("")}`;
 }
 
-
-/* ĐỒNG BỘ */
-
-function sync(){
-
-    if(isSyncing)return;
-
-    isSyncing=true;
-
-    fetch(
-        `${SCRIPT_URL}?event=${encodeURIComponent(EVENT_ID)}&t=${Date.now()}`
-    )
-
-    .then(r=>{
-
-        if(!r.ok)
-            throw new Error("HTTP "+r.status);
-
-        return r.json();
-
-    })
-
-    .then(data=>{
-
-        registered=
-            Number(data.count||0);
-
-        isFull=
-            registered>=MAX_PEOPLE;
-
-        renderList(
-            data.registrations||[]
-        );
-
-        if(registrationOpened)
-            renderStatus();
-
-    })
-
-    .catch(()=>{
-
-        registeredList.innerHTML=
-            `<div class="empty-list">
-            Không thể tải danh sách.
-            <br>
-            Vui lòng thử tải lại trang.
-            </div>`;
-
-    })
-
-    .finally(()=>{
-
-        isSyncing=false;
-
-    });
+function applyData(data){
+ registered=Number(data.count||0);
+ isFull=registered>=MAX_PEOPLE;
+ renderList(data.registrations||[]);
+ renderStatus();
+ try{sessionStorage.setItem(CACHE_KEY,JSON.stringify(data))}catch(e){}
 }
 
-
-/* ĐĂNG KÝ */
-
-form.addEventListener("submit",e=>{
-
-    e.preventDefault();
-
-    if(Date.now()<START_TIME)return;
-
-    if(registered>=MAX_PEOPLE){
-
-        message.textContent=
-            "Hoạt động đã đủ số lượng đăng ký.";
-
-        message.className=
-            "message error";
-
-        renderStatus();
-
-        return;
-    }
-
-    const fullName=
-        nameInput.value.trim();
-
-    const studentId=
-        studentInput.value.trim();
-
-    if(!fullName){
-
-        message.textContent=
-            "Vui lòng nhập họ và tên.";
-
-        message.className=
-            "message error";
-
-        nameInput.focus();
-
-        return;
-    }
-
-    if(!studentId){
-
-        message.textContent=
-            "Vui lòng nhập mã số sinh viên.";
-
-        message.className=
-            "message error";
-
-        studentInput.focus();
-
-        return;
-    }
-
-    submitButton.disabled=true;
-
-    submitButton.textContent=
-        "ĐANG XỬ LÝ...";
-
-    message.textContent="";
-
-    const fd=new FormData();
-
-    fd.append("name",fullName);
-    fd.append("studentId",studentId);
-    fd.append(
-        "time",
-        new Date().toLocaleString("vi-VN")
-    );
-    fd.append(
-        "maxLimit",
-        String(MAX_PEOPLE)
-    );
-    fd.append("event",EVENT_ID);
-
-    fetch(
-        SCRIPT_URL,
-        {
-            method:"POST",
-            body:fd
-        }
-    )
-
-    .then(r=>{
-
-        if(!r.ok)
-            throw new Error("HTTP "+r.status);
-
-        return r.json();
-
-    })
-
-    .then(data=>{
-
-        if(data.status==="success"){
-
-            message.textContent=
-                data.message||
-                "Đăng ký thành công!";
-
-            message.className=
-                "message success";
-
-            form.reset();
-
-            sync();
-
-        }
-
-        else if(data.status==="duplicate"){
-
-            message.textContent=
-                data.message||
-                "Mã số sinh viên này đã đăng ký hoạt động này trước đó.";
-
-            message.className=
-                "message error";
-
-            submitButton.disabled=false;
-
-            submitButton.textContent=
-                "XÁC NHẬN ĐĂNG KÝ";
-
-            sync();
-
-        }
-
-        else if(data.status==="full"){
-
-            message.textContent=
-                data.message||
-                "Đã đủ số lượng người đăng ký.";
-
-            message.className=
-                "message error";
-
-            submitButton.disabled=true;
-
-            submitButton.textContent=
-                "ĐÃ ĐÓNG ĐĂNG KÝ";
-
-            sync();
-
-        }
-
-        else{
-
-            message.textContent=
-                data.message||
-                "Đăng ký không thành công.";
-
-            message.className=
-                "message error";
-
-            submitButton.disabled=false;
-
-            submitButton.textContent=
-                "XÁC NHẬN ĐĂNG KÝ";
-
-            sync();
-        }
-
-    })
-
-    .catch(()=>{
-
-        message.textContent=
-            "Không thể kết nối hệ thống. Vui lòng thử lại.";
-
-        message.className=
-            "message error";
-
-        submitButton.disabled=false;
-
-        submitButton.textContent=
-            "XÁC NHẬN ĐĂNG KÝ";
-
-    });
-
+function loadCache(){
+ try{
+  const data=JSON.parse(sessionStorage.getItem(CACHE_KEY));
+  if(data)applyData(data);
+ }catch(e){}
+}
+
+async function sync(retry=true){
+ if(isSyncing)return;
+ isSyncing=true;
+ try{
+  const r=await fetch(`${SCRIPT_URL}?event=${encodeURIComponent(EVENT_ID)}&t=${Date.now()}`,{cache:"no-store"});
+  if(!r.ok)throw new Error("HTTP "+r.status);
+  const data=await r.json();
+  applyData(data);
+ }catch(e){
+  if(retry){
+   setTimeout(()=>{isSyncing=false;sync(false)},1200);
+   return;
+  }
+  if(!registered)registeredList.innerHTML='<div class="empty-list">Không thể tải danh sách.<br>Vui lòng thử lại.</div>';
+ }finally{
+  isSyncing=false;
+ }
+}
+
+form.addEventListener("submit",async e=>{
+ e.preventDefault();
+ if(Date.now()<START_TIME||isFull)return;
+
+ const fullName=nameInput.value.trim();
+ const studentId=studentInput.value.trim();
+
+ if(!fullName){
+  message.textContent="Vui lòng nhập họ và tên.";
+  message.className="message error";
+  nameInput.focus();
+  return;
+ }
+
+ if(!studentId){
+  message.textContent="Vui lòng nhập mã số sinh viên.";
+  message.className="message error";
+  studentInput.focus();
+  return;
+ }
+
+ submitButton.disabled=true;
+ submitButton.textContent="ĐANG XỬ LÝ...";
+ message.textContent="";
+
+ const fd=new FormData();
+ fd.append("name",fullName);
+ fd.append("studentId",studentId);
+ fd.append("time",new Date().toLocaleString("vi-VN"));
+ fd.append("maxLimit",String(MAX_PEOPLE));
+ fd.append("event",EVENT_ID);
+
+ try{
+  const r=await fetch(SCRIPT_URL,{method:"POST",body:fd});
+  if(!r.ok)throw new Error("HTTP "+r.status);
+  const data=await r.json();
+
+  if(data.status==="success"){
+   message.textContent=data.message||"Đăng ký thành công!";
+   message.className="message success";
+   form.reset();
+   await sync();
+  }else if(data.status==="duplicate"){
+   message.textContent=data.message||"Mã số sinh viên này đã đăng ký hoạt động này trước đó.";
+   message.className="message error";
+   submitButton.disabled=false;
+   submitButton.textContent="XÁC NHẬN ĐĂNG KÝ";
+   await sync();
+  }else if(data.status==="full"){
+   message.textContent=data.message||"Đã đủ số lượng người đăng ký.";
+   message.className="message error";
+   isFull=true;
+   renderStatus();
+   await sync();
+  }else{
+   throw new Error(data.message||"Đăng ký không thành công");
+  }
+ }catch(e){
+  message.textContent=e.message==="Đăng ký không thành công"?"Đăng ký không thành công.":"Không thể kết nối hệ thống. Vui lòng thử lại.";
+  message.className="message error";
+  submitButton.disabled=false;
+  submitButton.textContent="XÁC NHẬN ĐĂNG KÝ";
+ }
 });
-
-
-/* KHỞI ĐỘNG */
 
 showOpenTime();
 
 if(Date.now()>=START_TIME){
-
-    countdownScreen.style.display="none";
-
-    mainContainer.classList.add("show");
-
-    registrationOpened=true;
-
-    renderStatus();
-
+ registrationOpened=true;
+ countdownScreen.style.display="none";
+ mainContainer.classList.add("show");
+ loadCache();
+ sync();
 }else{
-
-    updateCountdown();
-
+ updateCountdown();
 }
 
-setInterval(()=>{
-
-    if(Date.now()<START_TIME)
-        updateCountdown();
-
+const timer=setInterval(()=>{
+ if(Date.now()>=START_TIME){
+  clearInterval(timer);
+  openRegistration();
+ }else updateCountdown();
 },1000);
-
-sync();
-
-setInterval(sync,3000);
-
 </script>
-
 </body>
 </html>
