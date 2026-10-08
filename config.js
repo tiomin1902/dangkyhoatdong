@@ -3,7 +3,7 @@ const MAX_PEOPLE = 5;
 const START_TIME_STRING = "2026-10-08T15:20:00";
 const EVENT_ID = "HoatDong_18";
 
-const isRegistrationActive = true; 
+const isRegistrationActive = false; 
 const CLOSED_MESSAGE = "CHƯA CÓ HOẠT ĐỘNG ĐỂ ĐĂNG KÝ. Vui lòng quay lại sau.";
 
 const eventDetails = {
