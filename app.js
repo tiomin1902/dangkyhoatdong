@@ -146,78 +146,104 @@ function escapeHtml(v){
     }[m]));
 }
 
-registerBtn.onclick=async()=>{
-    const name=nameInput.value.trim();
-    const studentId=studentIdInput.value.trim();
+if(registerBtn) {
+    registerBtn.onclick=async()=>{
+        const name=nameInput.value.trim();
+        const studentId=studentIdInput.value.trim();
 
-    if(!name){
-        setMessage("Vui lòng nhập họ và tên.","error");
-        nameInput.focus();
-        return;
-    }
+        if(!name){
+            setMessage("Vui lòng nhập họ và tên.","error");
+            nameInput.focus();
+            return;
+        }
 
-    if(!studentId){
-        setMessage("Vui lòng nhập mã số sinh viên.","error");
-        studentIdInput.focus();
-        return;
-    }
+        if(!studentId){
+            setMessage("Vui lòng nhập mã số sinh viên.","error");
+            studentIdInput.focus();
+            return;
+        }
 
-    if(Date.now()<startTime){
-        setMessage("Chưa đến thời gian mở đăng ký.","error");
-        return;
-    }
+        if(Date.now()<startTime){
+            setMessage("Chưa đến thời gian mở đăng ký.","error");
+            return;
+        }
 
-    if(Number(countEl.textContent)>=MAX_PEOPLE){
-        setMessage("Hoạt động đã đủ số lượng.","error");
-        return;
-    }
-
-    registerBtn.disabled=true;
-    registerBtn.textContent="ĐANG GỬI...";
-    setMessage("Đang xử lý đăng ký...","success");
-
-    const fd=new FormData();
-    fd.append("event",EVENT_ID);
-    fd.append("name",name);
-    fd.append("studentId",studentId);
-    fd.append("time",new Date().toLocaleString("vi-VN"));
-    fd.append("maxLimit",MAX_PEOPLE);
-
-    try{
-        const res=await fetch(SCRIPT_URL,{
-            method:"POST",
-            body:fd
-        });
-
-        const data=await res.json();
-
-        if(data.status==="success"){
-            setMessage("Đăng ký thành công!","success");
-            nameInput.value="";
-            studentIdInput.value="";
-            await sync();
-        }else if(data.status==="duplicate"){
-            setMessage("MSSV này đã đăng ký hoạt động này trước đó.","error");
-            await sync();
-        }else if(data.status==="full"){
+        if(Number(countEl.textContent)>=MAX_PEOPLE){
             setMessage("Hoạt động đã đủ số lượng.","error");
-            await sync();
-        }else{
-            setMessage(data.message||"Không thể đăng ký. Vui lòng thử lại.","error");
+            return;
         }
 
-    }catch(e){
-        setMessage("Không thể kết nối hệ thống. Vui lòng thử lại.","error");
-    }finally{
-        registerBtn.textContent="ĐĂNG KÝ THAM GIA";
+        registerBtn.disabled=true;
+        registerBtn.textContent="ĐANG GỬI...";
+        setMessage("Đang xử lý đăng ký...","success");
 
-        if(
-            Number(countEl.textContent)<MAX_PEOPLE &&
-            Date.now()>=startTime
-        ){
-            registerBtn.disabled=false;
+        const fd=new FormData();
+        fd.append("event",EVENT_ID);
+        fd.append("name",name);
+        fd.append("studentId",studentId);
+        fd.append("time",new Date().toLocaleString("vi-VN"));
+        fd.append("maxLimit",MAX_PEOPLE);
+
+        try{
+            const res=await fetch(SCRIPT_URL,{
+                method:"POST",
+                body:fd
+            });
+
+            const data=await res.json();
+
+            if(data.status==="success"){
+                setMessage("Đăng ký thành công!","success");
+                nameInput.value="";
+                studentIdInput.value="";
+                await sync();
+            }else if(data.status==="duplicate"){
+                setMessage("MSSV này đã đăng ký hoạt động này trước đó.","error");
+                await sync();
+            }else if(data.status==="full"){
+                setMessage("Hoạt động đã đủ số lượng.","error");
+                await sync();
+            }else{
+                setMessage(data.message||"Không thể đăng ký. Vui lòng thử lại.","error");
+            }
+
+        }catch(e){
+            setMessage("Không thể kết nối hệ thống. Vui lòng thử lại.","error");
+        }finally{
+            registerBtn.textContent="ĐĂNG KÝ THAM GIA";
+
+            if(
+                Number(countEl.textContent)<MAX_PEOPLE &&
+                Date.now()>=startTime
+            ){
+                registerBtn.disabled=false;
+            }
         }
-    }
-};
+    };
+}
+
+// Điều khiển nhạc nền
+const bgMusic = document.getElementById("bgMusic");
+const musicToggleBtn = document.getElementById("musicToggleBtn");
+
+if(musicToggleBtn && bgMusic) {
+    let isPlaying = false;
+    musicToggleBtn.onclick = () => {
+        if(isPlaying) {
+            bgMusic.pause();
+            musicToggleBtn.textContent = "🎵";
+            musicToggleBtn.style.opacity = "0.7";
+        } else {
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                musicToggleBtn.textContent = "🔊";
+                musicToggleBtn.style.opacity = "1";
+            }).catch(e => {
+                console.log("Trình duyệt chặn hoặc lỗi phát nhạc:", e);
+            });
+        }
+        isPlaying = !isPlaying;
+    };
+}
 
 sync();
