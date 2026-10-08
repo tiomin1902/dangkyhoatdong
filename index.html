@@ -1,373 +1,1898 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Đăng ký tham gia hoạt động</title>
+
 <style>
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
 body{
-min-height:100vh;padding:30px 0;display:flex;justify-content:center;align-items:center;
-font-family:"Times New Roman",Times,serif;
-background:linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.60)),url("https://media.apag.edu.vn/Image/023ced82-d60e-9622-cc13-0ce98d1cef93/2025/10/3/Hinh-anh-Phan-hieu-c2f3e4f995.jpg") center/cover fixed
+    min-height:100vh;
+    padding:40px 20px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-family:"Times New Roman",Times,serif;
+
+    color:#2b2118;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(42,0,0,.82),
+            rgba(92,13,13,.68),
+            rgba(0,0,0,.82)
+        ),
+        url("https://media.apag.edu.vn/Image/023ced82-d60e-9622-cc13-0ce98d1cef93/2025/10/3/Hinh-anh-Phan-hieu-c2f3e4f995.jpg")
+        center/cover fixed;
+
+    position:relative;
+    overflow-x:hidden;
 }
+
+
+/* =========================================================
+   BACKGROUND LIGHT EFFECT
+========================================================= */
+
+body::before{
+    content:"";
+    position:fixed;
+
+    width:600px;
+    height:600px;
+
+    top:-250px;
+    left:-180px;
+
+    background:radial-gradient(
+        circle,
+        rgba(212,175,55,.25),
+        transparent 68%
+    );
+
+    filter:blur(20px);
+
+    animation:lightMove 10s ease-in-out infinite alternate;
+
+    pointer-events:none;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+
+    width:500px;
+    height:500px;
+
+    right:-200px;
+    bottom:-200px;
+
+    background:radial-gradient(
+        circle,
+        rgba(139,0,0,.4),
+        transparent 68%
+    );
+
+    filter:blur(25px);
+
+    animation:lightMove2 12s ease-in-out infinite alternate;
+
+    pointer-events:none;
+}
+
+@keyframes lightMove{
+    from{
+        transform:translate(0,0) scale(1);
+    }
+
+    to{
+        transform:translate(160px,120px) scale(1.2);
+    }
+}
+
+@keyframes lightMove2{
+    from{
+        transform:translate(0,0) scale(1);
+    }
+
+    to{
+        transform:translate(-120px,-100px) scale(1.25);
+    }
+}
+
+
+/* =========================================================
+   MAIN CARD
+========================================================= */
+
 .container{
-width:90%;max-width:700px;padding:40px 35px;
-background:linear-gradient(135deg,#fffdf7,#f4ecd8);
-border:2px solid #b8860b;border-radius:8px;
-box-shadow:0 0 0 5px rgba(255,255,255,.95),0 0 0 7px #b8860b,0 15px 40px rgba(0,0,0,.70)
+
+    position:relative;
+    z-index:2;
+
+    width:100%;
+    max-width:760px;
+
+    padding:45px;
+
+    border-radius:28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.94),
+            rgba(255,248,230,.91)
+        );
+
+    border:1px solid rgba(255,255,255,.7);
+
+    box-shadow:
+        0 35px 90px rgba(0,0,0,.55),
+        0 0 0 1px rgba(212,175,55,.35),
+        inset 0 1px 0 rgba(255,255,255,.9);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    animation:
+        containerAppear
+        .9s cubic-bezier(.22,1,.36,1)
+        both;
+
+    overflow:hidden;
 }
+
+.container::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7b0000,
+            #d4af37,
+            #fff1a8,
+            #d4af37,
+            #7b0000
+        );
+
+    background-size:250% 100%;
+
+    animation:goldFlow 5s linear infinite;
+}
+
+.container::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:250px;
+    height:250px;
+
+    top:-130px;
+    right:-120px;
+
+    background:radial-gradient(
+        circle,
+        rgba(212,175,55,.16),
+        transparent 70%
+    );
+
+    pointer-events:none;
+}
+
+@keyframes containerAppear{
+
+    0%{
+        opacity:0;
+        transform:
+            translateY(35px)
+            scale(.96);
+    }
+
+    100%{
+        opacity:1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+@keyframes goldFlow{
+
+    from{
+        background-position:0% 50%;
+    }
+
+    to{
+        background-position:250% 50%;
+    }
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.header-decoration{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:15px;
+
+    color:#b8860b;
+}
+
+.header-decoration span{
+
+    display:block;
+
+    width:55px;
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #b8860b
+        );
+}
+
+.header-decoration span:last-child{
+
+    background:
+        linear-gradient(
+            90deg,
+            #b8860b,
+            transparent
+        );
+}
+
+.header-decoration b{
+
+    width:9px;
+    height:9px;
+
+    display:block;
+
+    transform:rotate(45deg);
+
+    background:#d4af37;
+
+    box-shadow:
+        0 0 12px rgba(212,175,55,.65);
+}
+
 h2{
-margin:0 0 20px;padding-bottom:15px;text-align:center;color:#8b0000;
-font-size:26px;line-height:1.4;border-bottom:2px dashed #b8860b
+
+    margin:0;
+
+    font-size:30px;
+
+    line-height:1.25;
+
+    letter-spacing:1.5px;
+
+    font-weight:700;
+
+    background:
+        linear-gradient(
+            135deg,
+            #680000,
+            #a00000 45%,
+            #c28b12
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+
+    text-shadow:
+        0 5px 18px rgba(139,0,0,.12);
 }
+
+.subtitle{
+
+    margin-top:12px;
+
+    font-size:14px;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+
+    color:#8b6b3e;
+
+    opacity:.85;
+}
+
+
+/* =========================================================
+   STATUS BOX
+========================================================= */
+
 .info-box{
-margin-bottom:25px;padding:15px 10px;text-align:center;
-background:rgba(184,134,11,.10);border:1px solid #b8860b;
-border-radius:5px;font-size:17px;line-height:1.6
+
+    position:relative;
+
+    margin-bottom:30px;
+
+    padding:22px 25px;
+
+    text-align:center;
+
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(139,0,0,.045),
+            rgba(212,175,55,.10)
+        );
+
+    border:1px solid rgba(184,134,11,.35);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.8),
+        0 10px 30px rgba(100,50,0,.06);
+
+    overflow:hidden;
+
+    animation:softAppear .8s .15s both;
 }
+
+.info-box::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-100%;
+
+    width:60%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.5),
+            transparent
+        );
+
+    transform:skewX(-20deg);
+
+    animation:shine 5s ease-in-out infinite;
+}
+
+@keyframes shine{
+
+    0%,55%{
+        left:-100%;
+    }
+
+    80%,100%{
+        left:150%;
+    }
+}
+
+@keyframes softAppear{
+
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.success{
+
+    color:#176b3a;
+
+    font-weight:bold;
+
+    letter-spacing:.5px;
+}
+
+.error{
+
+    color:#8b0000;
+
+    font-weight:bold;
+}
+
 .countdown{
-display:inline-block;margin-top:12px;padding:8px 20px;background:#fffaf0;
-color:#8b0000;border:2px dotted #b8860b;border-radius:30px;
-font-weight:bold;font-size:17px
+
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    margin-top:15px;
+
+    padding:11px 22px;
+
+    border-radius:50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fffdf5,
+            #fff6d9
+        );
+
+    border:1px solid #d4af37;
+
+    color:#8b0000;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    box-shadow:
+        0 8px 20px rgba(139,0,0,.08);
+
+    animation:pulse 2s infinite;
 }
-.form-group{margin-bottom:20px}
+
+@keyframes pulse{
+
+    0%,100%{
+        box-shadow:
+            0 8px 20px rgba(139,0,0,.08);
+    }
+
+    50%{
+        box-shadow:
+            0 8px 30px rgba(184,134,11,.25);
+    }
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-group{
+
+    position:relative;
+
+    margin-bottom:24px;
+
+    animation:softAppear .8s both;
+}
+
+.form-group:nth-child(1){
+    animation-delay:.25s;
+}
+
+.form-group:nth-child(2){
+    animation-delay:.35s;
+}
+
 label{
-display:block;margin-bottom:8px;color:#333;font-size:16px;
-font-weight:bold;letter-spacing:1px
+
+    display:block;
+
+    margin-bottom:9px;
+
+    color:#5d4630;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    letter-spacing:.8px;
 }
+
+.input-wrap{
+    position:relative;
+}
+
+.input-icon{
+
+    position:absolute;
+
+    left:16px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    font-size:17px;
+
+    color:#a27b2a;
+
+    pointer-events:none;
+
+    transition:.3s;
+}
+
 input{
-width:100%;padding:12px;background:#fffaf0;border:1px solid #b8860b;
-border-radius:3px;font:16px "Times New Roman",Times,serif
+
+    width:100%;
+
+    padding:16px 18px 16px 48px;
+
+    border-radius:13px;
+
+    border:1px solid rgba(184,134,11,.38);
+
+    background:
+        rgba(255,255,255,.72);
+
+    color:#2b2118;
+
+    font:
+        16px "Times New Roman",
+        Times,
+        serif;
+
+    outline:none;
+
+    box-shadow:
+        inset 0 1px 3px rgba(0,0,0,.04),
+        0 5px 15px rgba(80,40,0,.04);
+
+    transition:
+        border-color .3s,
+        box-shadow .3s,
+        transform .3s,
+        background .3s;
 }
+
+input::placeholder{
+    color:#a99a87;
+}
+
+input:hover:not(:disabled){
+
+    border-color:#c49b38;
+}
+
 input:focus{
-outline:none;border-color:#8b0000;box-shadow:0 0 0 2px rgba(139,0,0,.08)
+
+    background:#fff;
+
+    border-color:#8b0000;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 8px 25px rgba(139,0,0,.10),
+        0 0 0 4px rgba(139,0,0,.06);
 }
-input:disabled{background:#eee;color:#777;cursor:not-allowed}
+
+input:focus + .input-line{
+    transform:scaleX(1);
+}
+
+.input-line{
+
+    position:absolute;
+
+    left:0;
+    bottom:0;
+
+    width:100%;
+    height:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #8b0000,
+            #d4af37
+        );
+
+    transform:scaleX(0);
+
+    transform-origin:center;
+
+    transition:transform .35s;
+
+    border-radius:2px;
+}
+
+input:disabled{
+
+    background:#eeeeee;
+
+    color:#888;
+
+    cursor:not-allowed;
+
+    opacity:.7;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
 button{
-width:100%;padding:15px;background:linear-gradient(#d4af37,#b8860b);
-color:white;border:1px solid #8b6508;border-radius:4px;cursor:pointer;
-font:bold 18px "Times New Roman",Times,serif;letter-spacing:2px
+
+    position:relative;
+
+    width:100%;
+
+    margin-top:5px;
+
+    padding:17px 25px;
+
+    border:none;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    overflow:hidden;
+
+    color:white;
+
+    font:
+        bold 17px "Times New Roman",
+        Times,
+        serif;
+
+    letter-spacing:2px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #720000,
+            #a90000 50%,
+            #7a0000
+        );
+
+    box-shadow:
+        0 12px 30px rgba(114,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.22);
+
+    transition:
+        transform .25s,
+        box-shadow .25s,
+        filter .25s;
 }
-button:hover:not(:disabled){background:linear-gradient(#e1c04b,#c99a16)}
-button:disabled{background:#ccc;border-color:#999;color:#666;cursor:not-allowed}
+
+button::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-120%;
+
+    width:70%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.28),
+            transparent
+        );
+
+    transform:skewX(-20deg);
+
+    transition:.7s;
+}
+
+button:hover:not(:disabled){
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 18px 38px rgba(114,0,0,.36),
+        inset 0 1px 0 rgba(255,255,255,.25);
+
+    filter:brightness(1.08);
+}
+
+button:hover:not(:disabled)::before{
+    left:150%;
+}
+
+button:active:not(:disabled){
+
+    transform:translateY(-1px) scale(.99);
+}
+
+button:disabled{
+
+    background:
+        linear-gradient(
+            135deg,
+            #aaa,
+            #888
+        );
+
+    box-shadow:none;
+
+    cursor:not-allowed;
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
 .message{
-margin-top:20px;text-align:center;font-size:18px;font-weight:bold;line-height:1.5
+
+    min-height:25px;
+
+    margin-top:20px;
+
+    text-align:center;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    line-height:1.5;
+
+    animation:softAppear .4s;
 }
-.success{color:#006400}
-.error{color:#8b0000}
+
+
+/* =========================================================
+   REGISTERED LIST
+========================================================= */
+
 .registered-box{
-margin-top:25px;padding:18px;background:rgba(255,250,240,.95);
-border:1px solid #b8860b;border-radius:6px
+
+    margin-top:32px;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.76),
+            rgba(255,249,232,.8)
+        );
+
+    border:1px solid rgba(184,134,11,.28);
+
+    box-shadow:
+        0 12px 35px rgba(80,40,0,.07),
+        inset 0 1px 0 rgba(255,255,255,.9);
+
+    animation:softAppear .8s .45s both;
 }
+
 .registered-title{
-padding-bottom:10px;text-align:center;color:#8b0000;font-weight:bold;
-border-bottom:1px dashed #b8860b
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:12px;
+
+    padding-bottom:15px;
+
+    color:#7b0000;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    border-bottom:1px solid rgba(184,134,11,.25);
 }
-.registered-count{margin:10px;text-align:center;color:#666;font-size:14px}
-.registered-list{max-height:260px;overflow:auto;font-size:14px}
+
+.registered-title::before,
+.registered-title::after{
+
+    content:"";
+
+    width:30px;
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #d4af37
+        );
+}
+
+.registered-title::after{
+
+    background:
+        linear-gradient(
+            90deg,
+            #d4af37,
+            transparent
+        );
+}
+
+.registered-count{
+
+    margin:15px 0;
+
+    text-align:center;
+
+    color:#8a7459;
+
+    font-size:14px;
+}
+
+.registered-list{
+
+    max-height:280px;
+
+    overflow:auto;
+
+    border-radius:12px;
+
+    scrollbar-width:thin;
+    scrollbar-color:#c4a34a transparent;
+}
+
+.registered-list::-webkit-scrollbar{
+    width:6px;
+}
+
+.registered-list::-webkit-scrollbar-thumb{
+
+    background:#c4a34a;
+
+    border-radius:10px;
+}
+
 .table-row{
-display:grid;grid-template-columns:45px 1.6fr 1fr 1.3fr;
-gap:8px;padding:10px 5px;border-bottom:1px solid rgba(184,134,11,.20)
+
+    display:grid;
+
+    grid-template-columns:
+        55px
+        1.6fr
+        1fr
+        1.3fr;
+
+    gap:10px;
+
+    padding:13px 10px;
+
+    align-items:center;
+
+    border-bottom:1px solid rgba(184,134,11,.12);
+
+    transition:
+        background .25s,
+        transform .25s;
 }
+
+.table-row:not(.table-head):hover{
+
+    background:rgba(212,175,55,.08);
+
+    transform:translateX(3px);
+}
+
 .table-head{
-color:#8b0000;font-weight:bold;background:rgba(184,134,11,.08);
-border-bottom:2px solid #b8860b
+
+    color:#7b0000;
+
+    font-weight:bold;
+
+    font-size:13px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(139,0,0,.05),
+            rgba(212,175,55,.09)
+        );
+
+    border-bottom:2px solid #c5a33b;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:2;
 }
-.table-row>div{word-break:break-word}
-.empty-list,.loading-list{padding:10px;text-align:center;color:#777}
+
+.table-row>div{
+
+    word-break:break-word;
+}
+
+.empty-list,
+.loading-list{
+
+    padding:25px;
+
+    text-align:center;
+
+    color:#8f806e;
+
+    font-size:15px;
+}
+
+
+/* =========================================================
+   DECORATIVE FOOTER
+========================================================= */
+
+.footer-decoration{
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:28px;
+
+    color:#b18b35;
+
+    opacity:.65;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+}
+
+.footer-decoration::before,
+.footer-decoration::after{
+
+    content:"";
+
+    width:50px;
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #c5a33b
+        );
+}
+
+.footer-decoration::after{
+
+    background:
+        linear-gradient(
+            90deg,
+            #c5a33b,
+            transparent
+        );
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
 @media(max-width:600px){
-body{padding:20px 0}
-.container{width:94%;padding:30px 20px}
-h2{font-size:22px}
-.registered-list{overflow-x:auto}
-.table-row{min-width:550px}
+
+    body{
+
+        padding:20px 12px;
+
+        align-items:flex-start;
+    }
+
+    .container{
+
+        margin-top:15px;
+
+        padding:32px 20px;
+
+        border-radius:22px;
+    }
+
+    h2{
+
+        font-size:23px;
+
+        letter-spacing:1px;
+    }
+
+    .subtitle{
+
+        font-size:11px;
+
+        letter-spacing:2px;
+    }
+
+    .info-box{
+
+        padding:19px 15px;
+    }
+
+    .countdown{
+
+        font-size:15px;
+
+        padding:10px 15px;
+    }
+
+    .registered-box{
+
+        padding:18px 12px;
+    }
+
+    .table-row{
+
+        min-width:570px;
+    }
 }
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+
+        animation-duration:.01ms !important;
+
+        animation-iteration-count:1 !important;
+
+        transition-duration:.01ms !important;
+    }
+}
+
 </style>
 </head>
+
+
 <body>
+
 <div class="container">
-<h2>ĐĂNG KÝ THAM GIA HOẠT ĐỘNG<br>CHI ĐOÀN 2505QLNH</h2>
 
-<div class="info-box" id="statusInfo">Đang kiểm tra hệ thống...</div>
+    <div class="header">
 
-<form id="registrationForm">
-<div class="form-group">
-<label for="fullName">Họ và tên:</label>
-<input type="text" id="fullName" placeholder="Vui lòng nhập họ và tên" required disabled>
+        <div class="header-decoration">
+            <span></span>
+            <b></b>
+            <span></span>
+        </div>
+
+        <h2>
+            ĐĂNG KÝ THAM GIA HOẠT ĐỘNG<br>
+            CHI ĐOÀN 2505QLNH
+        </h2>
+
+        <div class="subtitle">
+            Hoạt động chi đoàn
+        </div>
+
+    </div>
+
+
+    <div class="info-box" id="statusInfo">
+        Đang kiểm tra hệ thống...
+    </div>
+
+
+    <form id="registrationForm">
+
+        <div class="form-group">
+
+            <label for="fullName">
+                Họ và tên
+            </label>
+
+            <div class="input-wrap">
+
+                <span class="input-icon">✦</span>
+
+                <input
+                    type="text"
+                    id="fullName"
+                    placeholder="Vui lòng nhập họ và tên"
+                    required
+                    disabled
+                >
+
+                <div class="input-line"></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="studentId">
+                Mã số sinh viên
+            </label>
+
+            <div class="input-wrap">
+
+                <span class="input-icon">✧</span>
+
+                <input
+                    type="text"
+                    id="studentId"
+                    placeholder="Vui lòng nhập mã số sinh viên"
+                    required
+                    disabled
+                >
+
+                <div class="input-line"></div>
+
+            </div>
+
+        </div>
+
+
+        <button
+            type="submit"
+            id="submitBtn"
+            disabled
+        >
+            XÁC NHẬN ĐĂNG KÝ
+        </button>
+
+    </form>
+
+
+    <div id="message" class="message"></div>
+
+
+    <div class="registered-box">
+
+        <div class="registered-title">
+            DANH SÁCH ĐÃ ĐĂNG KÝ THÀNH CÔNG
+        </div>
+
+        <div
+            id="registeredCount"
+            class="registered-count"
+        >
+            Đang cập nhật...
+        </div>
+
+        <div
+            id="registeredList"
+            class="registered-list"
+        >
+
+            <div class="loading-list">
+                Đang tải danh sách...
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-decoration">
+        CHI ĐOÀN 2505QLNH
+    </div>
+
 </div>
 
-<div class="form-group">
-<label for="studentId">Mã số sinh viên:</label>
-<input type="text" id="studentId" placeholder="Vui lòng nhập mã số sinh viên" required disabled>
-</div>
-
-<button type="submit" id="submitBtn" disabled>XÁC NHẬN ĐĂNG KÝ</button>
-</form>
-
-<div id="message" class="message"></div>
-
-<div class="registered-box">
-<div class="registered-title">DANH SÁCH ĐÃ ĐĂNG KÝ THÀNH CÔNG</div>
-<div id="registeredCount" class="registered-count">Đang cập nhật...</div>
-<div id="registeredList" class="registered-list">
-<div class="loading-list">Đang tải danh sách...</div>
-</div>
-</div>
-</div>
 
 <script>
-/* ===== CẤU HÌNH HOẠT ĐỘNG - CHỈ SỬA 4 DÒNG NÀY ===== */
-const SCRIPT_URL="https://script.google.com/macros/s/AKfycbw47YRZPh9w-SLci-ll0_bumZiIbqOUUO0w_cshvZx5Glo_DIi3tWPXa7iGCQYspapY/exec";
-const MAX_PEOPLE=2;
-const START_TIME_STRING="2026-10-08T13:30:00";
-const EVENT_ID="HoatDong_10";
-/* ===== HẾT PHẦN CẤU HÌNH ===== */
 
-const START_TIME=new Date(START_TIME_STRING).getTime();
-const form=document.getElementById("registrationForm");
-const nameInput=document.getElementById("fullName");
-const studentInput=document.getElementById("studentId");
-const submitButton=document.getElementById("submitBtn");
-const message=document.getElementById("message");
-const statusInfo=document.getElementById("statusInfo");
-const registeredList=document.getElementById("registeredList");
-const registeredCount=document.getElementById("registeredCount");
+/* =========================================================
+   CẤU HÌNH HOẠT ĐỘNG
+   CHỈ SỬA 4 DÒNG NÀY
+========================================================= */
 
-let registered=0;
-let isFull=false;
-let isSyncing=false;
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbw47YRZPh9w-SLci-ll0_bumZiIbqOUUO0w_cshvZx5Glo_DIi3tWPXa7iGCQYspapY/exec";
+
+const MAX_PEOPLE = 2;
+
+const START_TIME_STRING =
+"2026-10-08T13:30:00";
+
+const EVENT_ID =
+"HoatDong_10";
+
+
+/* =========================================================
+   KHỞI TẠO
+========================================================= */
+
+const START_TIME =
+    new Date(START_TIME_STRING).getTime();
+
+const form =
+    document.getElementById("registrationForm");
+
+const nameInput =
+    document.getElementById("fullName");
+
+const studentInput =
+    document.getElementById("studentId");
+
+const submitButton =
+    document.getElementById("submitBtn");
+
+const message =
+    document.getElementById("message");
+
+const statusInfo =
+    document.getElementById("statusInfo");
+
+const registeredList =
+    document.getElementById("registeredList");
+
+const registeredCount =
+    document.getElementById("registeredCount");
+
+
+let registered = 0;
+
+let isFull = false;
+
+let isSyncing = false;
+
+
+/* =========================================================
+   BẢO MẬT HTML
+========================================================= */
 
 function escapeHtml(value){
-return String(value||"")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+
+    return String(value || "")
+
+        .replace(/&/g,"&amp;")
+
+        .replace(/</g,"&lt;")
+
+        .replace(/>/g,"&gt;")
+
+        .replace(/"/g,"&quot;")
+
+        .replace(/'/g,"&#039;");
 }
+
+
+/* =========================================================
+   COUNTDOWN
+========================================================= */
 
 function updateCountdown(){
-if(Date.now()>=START_TIME){
-renderStatus();
-return;
+
+    if(Date.now() >= START_TIME){
+
+        renderStatus();
+
+        return;
+    }
+
+
+    const remaining =
+        START_TIME - Date.now();
+
+
+    const hours =
+        Math.floor(
+            remaining / 3600000
+        );
+
+
+    const minutes =
+        Math.floor(
+            (remaining % 3600000) / 60000
+        );
+
+
+    const seconds =
+        Math.floor(
+            (remaining % 60000) / 1000
+        );
+
+
+    statusInfo.innerHTML = `
+
+        <b class="error">
+            CHƯA MỞ ĐĂNG KÝ
+        </b>
+
+        <br>
+
+        Hệ thống sẽ mở lúc:
+
+        <br>
+
+        <b>
+            ${new Date(
+                START_TIME
+            ).toLocaleString("vi-VN")}
+        </b>
+
+        <br>
+
+        <div class="countdown">
+            ⏳ Còn
+            ${hours} giờ
+            ${minutes} phút
+            ${seconds} giây
+        </div>
+
+    `;
+
+
+    nameInput.disabled = true;
+
+    studentInput.disabled = true;
+
+    submitButton.disabled = true;
 }
 
-const remaining=START_TIME-Date.now();
-const hours=Math.floor(remaining/3600000);
-const minutes=Math.floor((remaining%3600000)/60000);
-const seconds=Math.floor((remaining%60000)/1000);
 
-statusInfo.innerHTML=`
-<b class="error">CHƯA MỞ ĐĂNG KÝ</b><br>
-Hệ thống sẽ mở lúc:<br>
-<b>${new Date(START_TIME).toLocaleString("vi-VN")}</b><br>
-<div class="countdown">⏳ Còn ${hours} giờ ${minutes} phút ${seconds} giây</div>
-`;
-
-nameInput.disabled=true;
-studentInput.disabled=true;
-submitButton.disabled=true;
-}
+/* =========================================================
+   TRẠNG THÁI HỆ THỐNG
+========================================================= */
 
 function renderStatus(){
-if(Date.now()<START_TIME){
-updateCountdown();
-return;
+
+    if(Date.now() < START_TIME){
+
+        updateCountdown();
+
+        return;
+    }
+
+
+    if(
+        isFull ||
+        registered >= MAX_PEOPLE
+    ){
+
+        nameInput.disabled = true;
+
+        studentInput.disabled = true;
+
+        submitButton.disabled = true;
+
+
+        statusInfo.innerHTML = `
+
+            <b class="error">
+                ĐÃ ĐÓNG ĐĂNG KÝ
+            </b>
+
+            <br>
+
+            Sự kiện đã đủ
+            <b>${MAX_PEOPLE}</b>
+            sinh viên.
+
+        `;
+
+        return;
+    }
+
+
+    nameInput.disabled = false;
+
+    studentInput.disabled = false;
+
+    submitButton.disabled = false;
+
+
+    statusInfo.innerHTML = `
+
+        <b class="success">
+            ● ĐANG MỞ ĐĂNG KÝ
+        </b>
+
+        <br>
+
+        Đã ghi nhận:
+        <b>${registered}/${MAX_PEOPLE}</b>
+        sinh viên.
+
+    `;
 }
 
-if(isFull||registered>=MAX_PEOPLE){
-nameInput.disabled=true;
-studentInput.disabled=true;
-submitButton.disabled=true;
 
-statusInfo.innerHTML=`
-<b class="error">ĐÃ ĐÓNG ĐĂNG KÝ</b><br>
-Sự kiện đã đủ <b>${MAX_PEOPLE}</b> sinh viên.
-`;
-return;
-}
-
-nameInput.disabled=false;
-studentInput.disabled=false;
-submitButton.disabled=false;
-
-statusInfo.innerHTML=`
-<b class="success">ĐANG MỞ ĐĂNG KÝ</b><br>
-Đã ghi nhận: <b>${registered}/${MAX_PEOPLE}</b> sinh viên.
-`;
-}
+/* =========================================================
+   DANH SÁCH ĐĂNG KÝ
+========================================================= */
 
 function renderList(data){
-if(!Array.isArray(data)||data.length===0){
-registeredCount.textContent="Chưa có bạn nào đăng ký.";
-registeredList.innerHTML=`
-<div class="empty-list">Danh sách hiện đang trống.</div>
-`;
-return;
+
+    if(
+        !Array.isArray(data) ||
+        data.length === 0
+    ){
+
+        registeredCount.textContent =
+            "Chưa có bạn nào đăng ký.";
+
+        registeredList.innerHTML = `
+
+            <div class="empty-list">
+                Danh sách hiện đang trống.
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    registeredCount.textContent =
+        `Đã có ${data.length}/${MAX_PEOPLE} bạn đăng ký`;
+
+
+    registeredList.innerHTML = `
+
+        <div class="table-row table-head">
+
+            <div>STT</div>
+
+            <div>HỌ VÀ TÊN</div>
+
+            <div>MSSV</div>
+
+            <div>THỜI GIAN</div>
+
+        </div>
+
+
+        ${data.map(function(item,index){
+
+            return `
+
+                <div class="table-row">
+
+                    <div>
+                        ${index + 1}
+                    </div>
+
+                    <div>
+                        ${escapeHtml(item.name)}
+                    </div>
+
+                    <div>
+                        ${escapeHtml(item.studentId)}
+                    </div>
+
+                    <div>
+                        ${escapeHtml(item.time)}
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("")}
+
+    `;
 }
 
-registeredCount.textContent=`Đã có ${data.length}/${MAX_PEOPLE} bạn đăng ký`;
 
-registeredList.innerHTML=`
-<div class="table-row table-head">
-<div>STT</div>
-<div>HỌ VÀ TÊN</div>
-<div>MSSV</div>
-<div>THỜI GIAN</div>
-</div>
-${data.map(function(item,index){
-return `
-<div class="table-row">
-<div>${index+1}</div>
-<div>${escapeHtml(item.name)}</div>
-<div>${escapeHtml(item.studentId)}</div>
-<div>${escapeHtml(item.time)}</div>
-</div>
-`;
-}).join("")}
-`;
-}
+/* =========================================================
+   ĐỒNG BỘ GOOGLE SHEETS
+========================================================= */
 
 function sync(){
-if(isSyncing)return;
-isSyncing=true;
 
-const url=SCRIPT_URL+"?event="+encodeURIComponent(EVENT_ID)+"&t="+Date.now();
+    if(isSyncing)
+        return;
 
-fetch(url)
-.then(function(response){
-if(!response.ok)throw new Error("HTTP "+response.status);
-return response.json();
-})
-.then(function(data){
-registered=Number(data.count||0);
-isFull=registered>=MAX_PEOPLE;
-renderList(data.registrations||[]);
-renderStatus();
-})
-.catch(function(error){
-console.error("SYNC ERROR:",error);
-registeredList.innerHTML=`
-<div class="empty-list">
-Không thể tải danh sách.<br>
-Vui lòng thử tải lại trang.
-</div>
-`;
-})
-.finally(function(){
-isSyncing=false;
-});
+
+    isSyncing = true;
+
+
+    const url =
+        SCRIPT_URL +
+        "?event=" +
+        encodeURIComponent(EVENT_ID) +
+        "&t=" +
+        Date.now();
+
+
+    fetch(url)
+
+        .then(function(response){
+
+            if(!response.ok)
+                throw new Error(
+                    "HTTP " + response.status
+                );
+
+            return response.json();
+
+        })
+
+
+        .then(function(data){
+
+            registered =
+                Number(data.count || 0);
+
+            isFull =
+                registered >= MAX_PEOPLE;
+
+            renderList(
+                data.registrations || []
+            );
+
+            renderStatus();
+
+        })
+
+
+        .catch(function(error){
+
+            console.error(
+                "SYNC ERROR:",
+                error
+            );
+
+
+            registeredList.innerHTML = `
+
+                <div class="empty-list">
+
+                    Không thể tải danh sách.
+
+                    <br>
+
+                    Vui lòng thử tải lại trang.
+
+                </div>
+
+            `;
+
+        })
+
+
+        .finally(function(){
+
+            isSyncing = false;
+
+        });
 }
 
-form.addEventListener("submit",function(event){
-event.preventDefault();
 
-if(Date.now()<START_TIME){
-message.textContent="Chưa đến giờ mở đăng ký.";
-message.className="message error";
-renderStatus();
-return;
-}
+/* =========================================================
+   SUBMIT
+========================================================= */
 
-if(registered>=MAX_PEOPLE){
-message.textContent="Hoạt động đã đủ số lượng đăng ký.";
-message.className="message error";
-renderStatus();
-return;
-}
+form.addEventListener(
+    "submit",
+    function(event){
 
-const fullName=nameInput.value.trim();
-const studentId=studentInput.value.trim();
+        event.preventDefault();
 
-if(!fullName){
-message.textContent="Vui lòng nhập họ và tên.";
-message.className="message error";
-nameInput.focus();
-return;
-}
 
-if(!studentId){
-message.textContent="Vui lòng nhập mã số sinh viên.";
-message.className="message error";
-studentInput.focus();
-return;
-}
+        if(Date.now() < START_TIME){
 
-submitButton.disabled=true;
-submitButton.textContent="ĐANG XỬ LÝ...";
-message.textContent="";
+            message.textContent =
+                "Chưa đến giờ mở đăng ký.";
 
-const formData=new FormData();
-formData.append("name",fullName);
-formData.append("studentId",studentId);
-formData.append("time",new Date().toLocaleString("vi-VN"));
-formData.append("maxLimit",String(MAX_PEOPLE));
-formData.append("event",EVENT_ID);
+            message.className =
+                "message error";
 
-fetch(SCRIPT_URL,{
-method:"POST",
-body:formData
-})
-.then(function(response){
-if(!response.ok)throw new Error("HTTP "+response.status);
-return response.json();
-})
-.then(function(data){
+            renderStatus();
 
-if(data.status==="success"){
-message.textContent=data.message||"Đăng ký thành công!";
-message.className="message success";
-form.reset();
+            return;
+        }
+
+
+        if(registered >= MAX_PEOPLE){
+
+            message.textContent =
+                "Hoạt động đã đủ số lượng đăng ký.";
+
+            message.className =
+                "message error";
+
+            renderStatus();
+
+            return;
+        }
+
+
+        const fullName =
+            nameInput.value.trim();
+
+
+        const studentId =
+            studentInput.value.trim();
+
+
+        if(!fullName){
+
+            message.textContent =
+                "Vui lòng nhập họ và tên.";
+
+            message.className =
+                "message error";
+
+            nameInput.focus();
+
+            return;
+        }
+
+
+        if(!studentId){
+
+            message.textContent =
+                "Vui lòng nhập mã số sinh viên.";
+
+            message.className =
+                "message error";
+
+            studentInput.focus();
+
+            return;
+        }
+
+
+        submitButton.disabled = true;
+
+        submitButton.textContent =
+            "ĐANG XỬ LÝ...";
+
+
+        message.textContent = "";
+
+
+        const formData =
+            new FormData();
+
+
+        formData.append(
+            "name",
+            fullName
+        );
+
+
+        formData.append(
+            "studentId",
+            studentId
+        );
+
+
+        formData.append(
+            "time",
+            new Date().toLocaleString("vi-VN")
+        );
+
+
+        formData.append(
+            "maxLimit",
+            String(MAX_PEOPLE)
+        );
+
+
+        formData.append(
+            "event",
+            EVENT_ID
+        );
+
+
+        fetch(
+            SCRIPT_URL,
+            {
+                method:"POST",
+                body:formData
+            }
+        )
+
+
+        .then(function(response){
+
+            if(!response.ok)
+
+                throw new Error(
+                    "HTTP " +
+                    response.status
+                );
+
+            return response.json();
+
+        })
+
+
+        .then(function(data){
+
+            if(
+                data.status ===
+                "success"
+            ){
+
+                message.textContent =
+                    data.message ||
+                    "Đăng ký thành công!";
+
+                message.className =
+                    "message success";
+
+                form.reset();
+
+                sync();
+
+                return;
+            }
+
+
+            if(
+                data.status ===
+                "duplicate"
+            ){
+
+                message.textContent =
+                    data.message ||
+                    "Mã số sinh viên này đã đăng ký hoạt động này trước đó.";
+
+                message.className =
+                    "message error";
+
+                submitButton.disabled =
+                    false;
+
+                submitButton.textContent =
+                    "XÁC NHẬN ĐĂNG KÝ";
+
+                sync();
+
+                return;
+            }
+
+
+            if(
+                data.status ===
+                "full"
+            ){
+
+                message.textContent =
+                    data.message ||
+                    "Đã đủ số lượng người đăng ký.";
+
+                message.className =
+                    "message error";
+
+                submitButton.disabled =
+                    true;
+
+                submitButton.textContent =
+                    "ĐÃ ĐÓNG ĐĂNG KÝ";
+
+                sync();
+
+                return;
+            }
+
+
+            message.textContent =
+                data.message ||
+                "Đăng ký không thành công.";
+
+            message.className =
+                "message error";
+
+
+            submitButton.disabled =
+                false;
+
+            submitButton.textContent =
+                "XÁC NHẬN ĐĂNG KÝ";
+
+
+            sync();
+
+        })
+
+
+        .catch(function(error){
+
+            console.error(
+                "REGISTER ERROR:",
+                error
+            );
+
+
+            message.textContent =
+                "Không thể kết nối hệ thống. Vui lòng thử lại.";
+
+            message.className =
+                "message error";
+
+
+            submitButton.disabled =
+                false;
+
+            submitButton.textContent =
+                "XÁC NHẬN ĐĂNG KÝ";
+
+        });
+
+    }
+);
+
+
+/* =========================================================
+   KHỞI ĐỘNG
+========================================================= */
+
 sync();
-return;
-}
 
-if(data.status==="duplicate"){
-message.textContent=data.message||"Mã số sinh viên này đã đăng ký hoạt động này trước đó.";
-message.className="message error";
-submitButton.disabled=false;
-submitButton.textContent="XÁC NHẬN ĐĂNG KÝ";
-sync();
-return;
-}
 
-if(data.status==="full"){
-message.textContent=data.message||"Đã đủ số lượng người đăng ký.";
-message.className="message error";
-submitButton.disabled=true;
-submitButton.textContent="ĐÃ ĐÓNG ĐĂNG KÝ";
-sync();
-return;
-}
+setInterval(
+    function(){
 
-message.textContent=data.message||"Đăng ký không thành công.";
-message.className="message error";
-submitButton.disabled=false;
-submitButton.textContent="XÁC NHẬN ĐĂNG KÝ";
-sync();
-})
-.catch(function(error){
-console.error("REGISTER ERROR:",error);
-message.textContent="Không thể kết nối hệ thống. Vui lòng thử lại.";
-message.className="message error";
-submitButton.disabled=false;
-submitButton.textContent="XÁC NHẬN ĐĂNG KÝ";
-});
-});
+        if(Date.now() < START_TIME){
 
-sync();
+            updateCountdown();
 
-setInterval(function(){
-if(Date.now()<START_TIME){
-updateCountdown();
-}else{
-renderStatus();
-}
-},1000);
+        }else{
 
-setInterval(sync,3000);
+            renderStatus();
+
+        }
+
+    },
+    1000
+);
+
+
+setInterval(
+    sync,
+    3000
+);
+
 </script>
+
 </body>
 </html>
