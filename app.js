@@ -13,6 +13,21 @@ const nameInput = document.getElementById("name");
 const studentIdInput = document.getElementById("studentId");
 const startText = document.getElementById("startText");
 
+// Tự động điền thông tin chi tiết hoạt động từ config.js vào giao diện
+if (typeof eventDetails !== 'undefined') {
+    const uiTitle = document.getElementById("uiEventTitle");
+    const uiTime = document.getElementById("uiEventTime");
+    const uiLoc = document.getElementById("uiEventLocation");
+    const uiDesc = document.getElementById("uiEventDesc");
+    const uiNote = document.getElementById("uiEventNote");
+
+    if(uiTitle && eventDetails.tenHoatDong) uiTitle.textContent = eventDetails.tenHoatDong;
+    if(uiTime) uiTime.textContent = eventDetails.thoiGianDienRa || "Chưa cập nhật";
+    if(uiLoc) uiLoc.textContent = eventDetails.diaDiem || "Chưa cập nhật";
+    if(uiDesc) uiDesc.textContent = eventDetails.noiDung || "Chưa cập nhật";
+    if(uiNote) uiNote.textContent = eventDetails.luuY || "Không có lưu ý đặc biệt";
+}
+
 if(document.getElementById("maxText")) {
     document.getElementById("maxText").textContent = MAX_PEOPLE;
 }
@@ -65,10 +80,13 @@ function updateStatus(count){
 
     // Kiểm tra nếu hệ thống thủ công đang đóng / chưa có hoạt động
     if (typeof isRegistrationActive !== 'undefined' && !isRegistrationActive) {
-        // Ẩn toàn bộ nội dung con bên trong thẻ hoạt động
+        statusEl.textContent = "● CHƯA CÓ HOẠT ĐỘNG";
+        statusEl.className = "status closed";
+        
+        // Ẩn các thành phần bên trong khi chưa có hoạt động
         if(activityCard) {
             Array.from(activityCard.children).forEach(child => {
-                child.style.display = "none";
+                if(child.id !== "closedBanner") child.style.display = "none";
             });
 
             // Tạo hoặc hiển thị thông báo bắt mắt
@@ -91,7 +109,7 @@ function updateStatus(count){
         }
         return;
     } else {
-        // Nếu bật lại, hiển thị lại các thành phần bên trong card
+        // Hiện lại các thành phần nếu bật hoạt động
         if(activityCard) {
             Array.from(activityCard.children).forEach(child => {
                 if(child.id !== "closedBanner") child.style.display = "";
