@@ -60,6 +60,17 @@ function setMessage(text,type){
 function updateStatus(count){
     countEl.textContent=count;
 
+    // Kiểm tra nếu hệ thống thủ công đang đóng / chưa có hoạt động
+    if (typeof isRegistrationActive !== 'undefined' && !isRegistrationActive) {
+        statusEl.textContent = "● CHƯA CÓ HOẠT ĐỘNG";
+        statusEl.className = "status closed";
+        registerBtn.disabled = true;
+        countdownLabel.textContent = "TRẠNG THÁI HỆ THỐNG";
+        countdown.textContent = "TẠM ĐÓNG";
+        setMessage(typeof CLOSED_MESSAGE !== 'undefined' ? CLOSED_MESSAGE : "Hiện tại chưa có hoạt động để đăng ký.", "error");
+        return;
+    }
+
     if(count>=MAX_PEOPLE){
         statusEl.textContent="● ĐÃ ĐỦ SỐ LƯỢNG";
         statusEl.className="status closed";
@@ -81,6 +92,7 @@ function updateStatus(count){
 }
 
 function updateCountdown(){
+    if (typeof isRegistrationActive !== 'undefined' && !isRegistrationActive) return;
     if(Number(countEl.textContent)>=MAX_PEOPLE)return;
 
     const diff=startTime-Date.now();
@@ -108,6 +120,12 @@ setInterval(updateCountdown,1000);
 updateCountdown();
 
 async function sync(){
+    if (typeof isRegistrationActive !== 'undefined' && !isRegistrationActive) {
+        updateStatus(0);
+        listEl.innerHTML='<tr><td colspan="4" class="empty">Hiện tại chưa có hoạt động nào để hiển thị danh sách.</td></tr>';
+        return;
+    }
+
     try{
         const res=await fetch(SCRIPT_URL+"?event="+encodeURIComponent(EVENT_ID)+"&t="+Date.now());
         if(!res.ok)throw new Error();
@@ -148,6 +166,11 @@ function escapeHtml(v){
 
 if(registerBtn) {
     registerBtn.onclick=async()=>{
+        if (typeof isRegistrationActive !== 'undefined' && !isRegistrationActive) {
+            setMessage(typeof CLOSED_MESSAGE !== 'undefined' ? CLOSED_MESSAGE : "Hiện tại chưa có hoạt động để đăng ký.", "error");
+            return;
+        }
+
         const name=nameInput.value.trim();
         const studentId=studentIdInput.value.trim();
 
@@ -213,6 +236,7 @@ if(registerBtn) {
             registerBtn.textContent="ĐĂNG KÝ THAM GIA";
 
             if(
+                typeof isRegistrationActive !== 'undefined' && isRegistrationActive &&
                 Number(countEl.textContent)<MAX_PEOPLE &&
                 Date.now()>=startTime
             ){
