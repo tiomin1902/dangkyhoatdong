@@ -188,7 +188,19 @@ tr:last-child td{border-bottom:0}
 <div class="activity-card">
 <div id="status" class="status waiting">● ĐANG KIỂM TRA</div>
 
-<h3>Đăng ký tham gia hoạt động Chi đoàn</h3>
+<h3 id="uiEventTitle">Đăng ký tham gia hoạt động Chi đoàn</h3>
+
+<!-- KHUNG HIỂN THỊ THÔNG TIN CHI TIẾT HOẠT ĐỘNG -->
+<div id="eventInfoBox" style="margin: 20px 0; padding: 20px; border-radius: 14px; background: #fff8e8; border: 1px dashed #b8860b50;">
+    <h4 style="color: var(--red); font-size: 18px; margin-bottom: 12px; border-bottom: 1px solid #b8860b30; padding-bottom: 8px;">📌 Thông tin chi tiết hoạt động</h4>
+    <ul style="list-style: none; padding: 0; font-size: 15px; color: #5a4738; line-height: 1.8;">
+        <li>⏱️ <strong>Thời gian diễn ra:</strong> <span id="uiEventTime">Đang cập nhật...</span></li>
+        <li>📍 <strong>Địa điểm:</strong> <span id="uiEventLocation">Đang cập nhật...</span></li>
+        <li>📝 <strong>Nội dung:</strong> <span id="uiEventDesc">Đang cập nhật...</span></li>
+        <li>⚠️ <strong>Lưu ý:</strong> <span id="uiEventNote">Đang cập nhật...</span></li>
+    </ul>
+</div>
+<!-- KẾT THÚC KHUNG THÔNG TIN -->
 
 <p class="activity-desc">
 Vui lòng điền chính xác họ và tên cùng mã số sinh viên.
