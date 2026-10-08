@@ -3,11 +3,9 @@ const MAX_PEOPLE = 5;
 const START_TIME_STRING = "2026-10-08T15:20:00";
 const EVENT_ID = "HoatDong_18";
 
-// Trạng thái hệ thống: true (mở đăng ký) | false (chưa có hoạt động)
-const isRegistrationActive = false; 
+const isRegistrationActive = true; 
 const CLOSED_MESSAGE = "CHƯA CÓ HOẠT ĐỘNG ĐỂ ĐĂNG KÝ. Vui lòng quay lại sau.";
 
-// Thông tin chi tiết hoạt động
 const eventDetails = {
     tenHoatDong: "Giải bóng đá Thanh niên Chi đoàn 2505QLNH",
     thoiGianDienRa: "08:00 sáng, Chủ nhật, ngày 18/10/2026",
