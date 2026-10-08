@@ -60,15 +60,34 @@ function setMessage(text,type){
 function updateStatus(count){
     countEl.textContent=count;
 
+    const metaBox = document.querySelector(".meta");
+    const countdownBox = document.querySelector(".countdown-box");
+    const formBox = document.querySelector(".form-box");
+    const regTitle = document.querySelector(".reg-title");
+    const tableWrap = document.querySelector(".table-wrap");
+
     // Kiểm tra nếu hệ thống thủ công đang đóng / chưa có hoạt động
     if (typeof isRegistrationActive !== 'undefined' && !isRegistrationActive) {
         statusEl.textContent = "● CHƯA CÓ HOẠT ĐỘNG";
         statusEl.className = "status closed";
-        registerBtn.disabled = true;
-        countdownLabel.textContent = "TRẠNG THÁI HỆ THỐNG";
-        countdown.textContent = "TẠM ĐÓNG";
-        setMessage(typeof CLOSED_MESSAGE !== 'undefined' ? CLOSED_MESSAGE : "Hiện tại chưa có hoạt động để đăng ký.", "error");
+        
+        // Ẩn các thành phần không cần thiết khi chưa có hoạt động
+        if(metaBox) metaBox.style.display = "none";
+        if(countdownBox) countdownBox.style.display = "none";
+        if(formBox) formBox.style.display = "none";
+        if(regTitle) regTitle.style.display = "none";
+        if(tableWrap) tableWrap.style.display = "none";
+
+        setMessage(typeof CLOSED_MESSAGE !== 'undefined' ? CLOSED_MESSAGE : "Hiện tại chưa có hoạt động nào mở đăng ký.", "error");
         return;
+    } else {
+        // Hiện lại nếu bật hoạt động
+        if(metaBox) metaBox.style.display = "flex";
+        if(countdownBox) countdownBox.style.display = "block";
+        if(formBox) formBox.style.display = "block";
+        if(regTitle) regTitle.style.display = "block";
+        if(tableWrap) tableWrap.style.display = "block";
+        if(message) message.className = "message";
     }
 
     if(count>=MAX_PEOPLE){
@@ -122,7 +141,6 @@ updateCountdown();
 async function sync(){
     if (typeof isRegistrationActive !== 'undefined' && !isRegistrationActive) {
         updateStatus(0);
-        listEl.innerHTML='<tr><td colspan="4" class="empty">Hiện tại chưa có hoạt động nào để hiển thị danh sách.</td></tr>';
         return;
     }
 
@@ -167,7 +185,7 @@ function escapeHtml(v){
 if(registerBtn) {
     registerBtn.onclick=async()=>{
         if (typeof isRegistrationActive !== 'undefined' && !isRegistrationActive) {
-            setMessage(typeof CLOSED_MESSAGE !== 'undefined' ? CLOSED_MESSAGE : "Hiện tại chưa có hoạt động để đăng ký.", "error");
+            setMessage(typeof CLOSED_MESSAGE !== 'undefined' ? CLOSED_MESSAGE : "Hiện tại chưa có hoạt động nào mở đăng ký.", "error");
             return;
         }
 
