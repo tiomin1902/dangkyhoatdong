@@ -4,120 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Chi đoàn 2505QLNH</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--red:#720000;--red2:#a90000;--gold:#d4af37;--cream:#fff8e8;--dark:#241914;--muted:#806d5b}
-html{scroll-behavior:smooth}
-body{min-height:100vh;font-family:"Times New Roman",serif;color:var(--dark);background:var(--cream)}
-button,input{font-family:inherit}
-button{cursor:pointer}
-.header{position:fixed;top:0;left:0;right:0;height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;background:#fffaf0eF;backdrop-filter:blur(16px);border-bottom:1px solid #b8860b30;z-index:100}
-.logo{display:flex;align-items:center;gap:12px}
-.logo-mark{width:43px;height:43px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:bold;background:linear-gradient(135deg,#720000,#ae0000);box-shadow:0 5px 18px #72000035}
-.logo-text strong{display:block;color:var(--red);font-size:18px;letter-spacing:1px}
-.logo-text span{font-size:10px;color:#927a55;letter-spacing:2px}
-.menu-btn{width:47px;height:47px;border:1px solid #b8860b55;border-radius:50%;background:#fffaf0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px}
-.menu-btn span{width:21px;height:2px;background:var(--red)}
-.menu{position:fixed;top:0;right:-390px;width:min(390px,88vw);height:100vh;background:linear-gradient(145deg,#fffaf0,#f4ead5);z-index:200;padding:95px 35px 35px;box-shadow:-20px 0 60px #0003;transition:.45s cubic-bezier(.22,1,.36,1)}
-.menu.open{right:0}
-.menu-close{position:absolute;right:28px;top:22px;width:42px;height:42px;border:0;border-radius:50%;background:#72000010;color:var(--red);font-size:25px}
-.menu-title{color:var(--red);font-size:12px;letter-spacing:3px;margin-bottom:10px}
-.menu-name{font-size:25px;font-weight:bold;margin-bottom:30px}
-.menu-line{height:1px;background:#b8860b35;margin-bottom:18px}
-.menu-item{width:100%;display:flex;align-items:center;gap:16px;padding:17px 12px;border:0;background:none;text-align:left;font-size:19px;color:#382a20;border-radius:12px;transition:.25s}
-.menu-item:hover,.menu-item.active{background:#7200000d;color:var(--red);padding-left:18px}
-.menu-icon{width:35px;height:35px;border-radius:10px;display:grid;place-items:center;background:#7200000d;color:var(--red)}
-.overlay{position:fixed;inset:0;background:#0008;z-index:150;opacity:0;visibility:hidden;transition:.3s}
-.overlay.show{opacity:1;visibility:visible}
-.page{display:none;min-height:100vh;padding-top:76px}
-.page.active{display:block;animation:pageIn .4s ease}
-@keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.hero{min-height:calc(100vh - 76px);display:flex;align-items:center;padding:70px 8%;position:relative;overflow:hidden;background:linear-gradient(135deg,#470000eb,#820000d9,#240000ed),url("https://media.apag.edu.vn/Image/023ced82-d60e-9622-cc13-0ce98d1cef93/2025/10/3/Hinh-anh-Phan-hieu-c2f3e4f995.jpg") center/cover}
-.hero:after{content:"";position:absolute;width:600px;height:600px;right:-220px;bottom:-300px;border-radius:50%;background:radial-gradient(circle,#d4af3745,transparent 68%)}
-.hero-content{position:relative;z-index:2;max-width:820px;color:#fff}
-.hero-small{font-size:14px;letter-spacing:5px;color:#e6c96a;margin-bottom:22px}
-.hero h1{font-size:clamp(48px,8vw,100px);line-height:.9;letter-spacing:3px;margin-bottom:25px}
-.hero h1 span{display:block;color:#e4c55d}
-.hero-desc{max-width:620px;font-size:19px;line-height:1.7;color:#fffddf;margin-bottom:35px}
-.hero-buttons{display:flex;gap:13px;flex-wrap:wrap}
-.btn{padding:14px 25px;border-radius:30px;border:1px solid #d4af3780;font-weight:bold;letter-spacing:1px;transition:.25s}
-.btn-primary{background:var(--gold);color:#390000}
-.btn-secondary{background:#ffffff12;color:#fff}
-.btn:hover{transform:translateY(-3px)}
-.home-section{padding:80px 8%;background:var(--cream)}
-.section-label{font-size:12px;letter-spacing:4px;color:#a17d30;margin-bottom:12px}
-.section-title{font-size:38px;color:var(--red);margin-bottom:40px}
-.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
-.card{padding:35px;border-radius:22px;background:#fffdf8;border:1px solid #b8860b25;box-shadow:0 15px 40px #4b250012;transition:.3s}
-.card:hover{transform:translateY(-5px)}
-.card-icon{font-size:28px;color:var(--gold);margin-bottom:18px}
-.card h3{font-size:23px;color:var(--red);margin-bottom:10px}
-.card p{color:var(--muted);line-height:1.7}
-.info-page,.activity-page{padding:70px 8%;min-height:calc(100vh - 76px);background:var(--cream)}
-.page-heading{text-align:center;max-width:800px;margin:0 auto 45px}
-.page-heading .label{font-size:12px;letter-spacing:4px;color:#a17d30}
-.page-heading h2{font-size:45px;color:var(--red);margin:12px 0}
-.page-heading p{color:var(--muted);font-size:17px;line-height:1.7}
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px;max-width:1000px;margin:auto}
-.info-card{background:#fffdf8;padding:30px;border-radius:20px;border:1px solid #b8860b25}
-.info-card h3{color:var(--red);font-size:22px;margin-bottom:18px}
-.info-card p{line-height:1.8;color:#665546}
-.info-list{list-style:none}
-.info-list li{padding:12px 0;border-bottom:1px solid #b8860b18;color:#665546}
-.info-list li:last-child{border:0}
-.activity-wrap{max-width:1000px;margin:auto}
-.activity-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:30px}
-.activity-head h2{font-size:42px;color:var(--red)}
-.activity-head p{color:var(--muted);margin-top:7px}
-.activity-card{background:#fffdf8;border:1px solid #b8860b30;border-radius:25px;padding:30px;box-shadow:0 15px 40px #4b250012}
-.status{display:inline-block;padding:7px 14px;border-radius:30px;background:#176b3a12;color:#176b3a;font-weight:bold;font-size:12px;margin-bottom:18px}
-.status.closed{background:#72000012;color:var(--red)}
-.status.waiting{background:#b8860b15;color:#8a6817}
-.activity-card h3{font-size:29px;color:var(--red);margin-bottom:8px}
-.activity-desc{color:var(--muted);line-height:1.7;margin-bottom:22px}
-.meta{display:flex;gap:22px;flex-wrap:wrap;color:#6d5a47;font-size:14px;padding-bottom:22px;border-bottom:1px solid #b8860b20}
-.countdown-box{margin:22px 0;padding:22px;border-radius:18px;background:linear-gradient(135deg,#720000,#a90000);color:#fff;text-align:center}
-.countdown-label{font-size:12px;letter-spacing:3px;color:#e8cf7b;margin-bottom:8px}
-.countdown{font-size:34px;font-weight:bold;letter-spacing:2px}
-.form-box{margin-top:22px;padding:25px;border-radius:18px;background:#fff8e8;border:1px solid #b8860b30}
-.form-box h4{font-size:20px;color:var(--red);margin-bottom:6px}
-.form-note{font-size:14px;color:var(--muted);margin-bottom:17px}
-.input{width:100%;padding:14px 16px;margin-bottom:12px;border:1px solid #b8860b45;border-radius:10px;background:#fff;font-size:16px;outline:none}
-.input:focus{border-color:var(--red);box-shadow:0 0 0 3px #7200000d}
-.register-btn{width:100%;padding:15px;border:0;border-radius:10px;background:var(--red);color:#fff;font-weight:bold;font-size:16px;transition:.2s}
-.register-btn:hover{background:var(--red2)}
-.register-btn:disabled{background:#aaa;cursor:not-allowed}
-.message{margin-top:13px;padding:12px;border-radius:9px;display:none;text-align:center;font-size:14px}
-.message.show{display:block}
-.message.success{background:#176b3a15;color:#176b3a}
-.message.error{background:#72000012;color:var(--red)}
-.reg-title{margin:30px 0 13px;color:var(--red);font-size:21px}
-.table-wrap{overflow-x:auto;border:1px solid #b8860b25;border-radius:14px;background:#fff}
-table{width:100%;border-collapse:collapse;min-width:550px}
-th,td{padding:13px 15px;text-align:left;border-bottom:1px solid #b8860b18;font-size:14px}
-th{background:#720000;color:#fff}
-tr:last-child td{border-bottom:0}
-.empty{padding:30px;text-align:center;color:#897968}
-.footer{padding:25px 8%;background:#300000;color:#e8d79a;text-align:center;font-size:13px;letter-spacing:1px}
-@media(max-width:700px){
-.header{height:68px;padding:0 18px}.logo-mark{width:38px;height:38px}.logo-text strong{font-size:15px}.logo-text span{font-size:9px}.menu-btn{width:43px;height:43px}
-.page{padding-top:68px}.hero{min-height:calc(100svh - 68px);padding:55px 25px;align-items:end}.hero-small{font-size:11px;letter-spacing:3px}.hero h1{font-size:52px}.hero-desc{font-size:16px}.hero-buttons{flex-direction:column}.btn{width:100%}
-.home-section,.info-page,.activity-page{padding:55px 18px}.section-title,.page-heading h2,.activity-head h2{font-size:31px}.cards,.info-grid{grid-template-columns:1fr}.card{padding:25px}.activity-head{display:block}.activity-card{padding:21px}.activity-card h3{font-size:25px}.countdown{font-size:27px}.menu{padding:85px 25px 25px}
-}
-</style>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
 <header class="header">
-<div class="logo">
-<div class="logo-mark">25</div>
-<div class="logo-text"><strong>2505QLNH</strong><span>CHI ĐOÀN</span></div>
-</div>
+<div class="logo"><div class="logo-mark">25</div><div class="logo-text"><strong>2505QLNH</strong><span>CHI ĐOÀN</span></div></div>
 <button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button>
 </header>
-
 <div class="overlay" id="overlay"></div>
-
 <nav class="menu" id="menu">
 <button class="menu-close" id="menuClose">×</button>
 <div class="menu-title">CỔNG THÔNG TIN</div>
@@ -127,292 +21,47 @@ tr:last-child td{border-bottom:0}
 <button class="menu-item" data-page="info"><span class="menu-icon">✦</span>Thông tin Chi đoàn</button>
 <button class="menu-item" data-page="activity"><span class="menu-icon">✎</span>Đăng ký hoạt động</button>
 </nav>
-
 <main id="home" class="page active">
-<section class="hero">
-<div class="hero-content">
+<section class="hero"><div class="hero-content">
 <div class="hero-small">CHI ĐOÀN • 2505QLNH</div>
 <h1>CHI ĐOÀN <span>2505QLNH</span></h1>
 <p class="hero-desc">Cổng thông tin số của Chi đoàn 2505QLNH — nơi kết nối đoàn viên, cập nhật thông tin và tham gia các hoạt động của Chi đoàn.</p>
-<div class="hero-buttons">
-<button class="btn btn-primary" data-go="activity">ĐĂNG KÝ HOẠT ĐỘNG</button>
-<button class="btn btn-secondary" data-go="info">TÌM HIỂU CHI ĐOÀN</button>
-</div>
-</div>
-</section>
+<div class="hero-buttons"><button class="btn btn-primary" data-go="activity">ĐĂNG KÝ HOẠT ĐỘNG</button><button class="btn btn-secondary" data-go="info">TÌM HIỂU CHI ĐOÀN</button></div>
+</div></section>
 <section class="home-section">
 <div class="section-label">KHÁM PHÁ</div>
 <h2 class="section-title">Mọi thông tin ở một nơi.</h2>
 <div class="cards">
-<div class="card" data-go="info">
-<div class="card-icon">✦</div>
-<h3>Thông tin Chi đoàn</h3>
-<p>Tìm hiểu thông tin, nhiệm kỳ và những hoạt động của tập thể Chi đoàn.</p>
-</div>
-<div class="card" data-go="activity">
-<div class="card-icon">✎</div>
-<h3>Đăng ký hoạt động</h3>
-<p>Xem trạng thái hoạt động, thời gian mở đăng ký và đăng ký trực tiếp.</p>
-</div>
-</div>
-</section>
+<div class="card" data-go="info"><div class="card-icon">✦</div><h3>Thông tin Chi đoàn</h3><p>Tìm hiểu thông tin, nhiệm kỳ và những hoạt động của tập thể Chi đoàn.</p></div>
+<div class="card" data-go="activity"><div class="card-icon">✎</div><h3>Đăng ký hoạt động</h3><p>Xem trạng thái hoạt động, thời gian mở đăng ký và đăng ký trực tiếp.</p></div>
+</div></section>
 <div class="footer">CHI ĐOÀN 2505QLNH • CỔNG THÔNG TIN SỐ</div>
 </main>
-
 <section id="info" class="page">
-<div class="info-page">
-<div class="page-heading">
-<div class="label">GIỚI THIỆU</div>
-<h2>Thông tin Chi đoàn</h2>
-<p>Nơi tập hợp những thông tin cơ bản về Chi đoàn 2505QLNH.</p>
-</div>
+<div class="info-page"><div class="page-heading"><div class="label">GIỚI THIỆU</div><h2>Thông tin Chi đoàn</h2><p>Nơi tập hợp những thông tin cơ bản về Chi đoàn 2505QLNH.</p></div>
 <div class="info-grid">
-<div class="info-card">
-<h3>Về Chi đoàn</h3>
-<p>Chi đoàn 2505QLNH là tập thể đoàn viên sinh viên cùng học tập, rèn luyện, tham gia công tác Đoàn và các hoạt động tập thể.</p>
-</div>
-<div class="info-card">
-<h3>Thông tin nhiệm kỳ</h3>
-<ul class="info-list">
-<li><strong>Chi đoàn:</strong> 2505QLNH</li>
-<li><strong>Nhiệm kỳ:</strong> 2026 – 2027</li>
-<li><strong>Đơn vị:</strong> Đoàn Thanh niên</li>
-</ul>
-</div>
-<div class="info-card">
-<h3>Ban Chấp hành</h3>
-<ul class="info-list">
-<li>Bí thư Chi đoàn</li>
-<li>Phó Bí thư Chi đoàn</li>
-<li>Ủy viên Ban Chấp hành</li>
-</ul>
-</div>
-<div class="info-card">
-<h3>Giá trị hoạt động</h3>
-<p>Đoàn kết • Trách nhiệm • Chủ động • Cống hiến</p>
-</div>
-</div>
-</div>
+<div class="info-card"><h3>Về Chi đoàn</h3><p>Chi đoàn 2505QLNH là tập thể đoàn viên sinh viên cùng học tập, rèn luyện, tham gia công tác Đoàn và các hoạt động tập thể.</p></div>
+<div class="info-card"><h3>Thông tin nhiệm kỳ</h3><ul class="info-list"><li><strong>Chi đoàn:</strong> 2505QLNH</li><li><strong>Nhiệm kỳ:</strong> 2026 – 2027</li><li><strong>Đơn vị:</strong> Đoàn Thanh niên</li></ul></div>
+<div class="info-card"><h3>Ban Chấp hành</h3><ul class="info-list"><li>Bí thư Chi đoàn</li><li>Phó Bí thư Chi đoàn</li><li>Ủy viên Ban Chấp hành</li></ul></div>
+<div class="info-card"><h3>Giá trị hoạt động</h3><p>Đoàn kết • Trách nhiệm • Chủ động • Cống hiến</p></div>
+</div></div>
 <div class="footer">CHI ĐOÀN 2505QLNH</div>
 </section>
-
 <section id="activity" class="page">
-<div class="activity-page">
-<div class="activity-wrap">
-<div class="activity-head">
-<div>
-<div class="section-label">HOẠT ĐỘNG</div>
-<h2>Đăng ký hoạt động</h2>
-<p>Đăng ký trực tiếp và theo dõi số lượng trên hệ thống.</p>
-</div>
-</div>
-
+<div class="activity-page"><div class="activity-wrap"><div class="activity-head"><div><div class="section-label">HOẠT ĐỘNG</div><h2>Đăng ký hoạt động</h2><p>Đăng ký trực tiếp và theo dõi số lượng trên hệ thống.</p></div></div>
 <div class="activity-card">
 <div id="status" class="status waiting">● ĐANG KIỂM TRA</div>
 <h3>Đăng ký tham gia hoạt động Chi đoàn</h3>
 <p class="activity-desc">Vui lòng điền chính xác họ và tên cùng mã số sinh viên. Mỗi MSSV chỉ được đăng ký một lần cho hoạt động này.</p>
-
-<div class="meta">
-<span>◷ Mở đăng ký: <strong id="startText">—</strong></span>
-<span>♙ Số lượng: <strong><span id="count">0</span>/<span id="maxText">2</span></strong></span>
-</div>
-
-<div class="countdown-box">
-<div class="countdown-label" id="countdownLabel">ĐANG KIỂM TRA TRẠNG THÁI</div>
-<div class="countdown" id="countdown">--:--:--</div>
-</div>
-
-<div class="form-box">
-<h4>Thông tin đăng ký</h4>
-<div class="form-note">Thông tin sẽ được ghi trực tiếp vào hệ thống của Chi đoàn.</div>
-<input class="input" id="name" type="text" placeholder="Họ và tên">
-<input class="input" id="studentId" type="text" placeholder="Mã số sinh viên">
-<button class="register-btn" id="registerBtn">ĐĂNG KÝ THAM GIA</button>
-<div class="message" id="message"></div>
-</div>
-
+<div class="meta"><span>◷ Mở đăng ký: <strong id="startText">—</strong></span><span>♙ Số lượng: <strong><span id="count">0</span>/<span id="maxText">2</span></strong></span></div>
+<div class="countdown-box"><div class="countdown-label" id="countdownLabel">ĐANG KIỂM TRA TRẠNG THÁI</div><div class="countdown" id="countdown">--:--:--</div></div>
+<div class="form-box"><h4>Thông tin đăng ký</h4><div class="form-note">Thông tin sẽ được ghi trực tiếp vào hệ thống của Chi đoàn.</div><input class="input" id="name" type="text" placeholder="Họ và tên"><input class="input" id="studentId" type="text" placeholder="Mã số sinh viên"><button class="register-btn" id="registerBtn">ĐĂNG KÝ THAM GIA</button><div class="message" id="message"></div></div>
 <h3 class="reg-title">Danh sách đã đăng ký</h3>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>#</th><th>Họ và tên</th><th>MSSV</th><th>Thời gian</th></tr>
-</thead>
-<tbody id="registrationList">
-<tr><td colspan="4" class="empty">Đang tải dữ liệu...</td></tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Họ và tên</th><th>MSSV</th><th>Thời gian</th></tr></thead><tbody id="registrationList"><tr><td colspan="4" class="empty">Đang tải dữ liệu...</td></tr></tbody></table></div>
+</div></div></div>
 <div class="footer">CHI ĐOÀN 2505QLNH</div>
 </section>
-
-<script>
-const SCRIPT_URL="https://script.google.com/macros/s/AKfycbw47YRZPh9w-SLci-ll0_bumZiIbqOUUO0w_cshvZx5Glo_DIi3tWPXa7iGCQYspapY/exec";
-const MAX_PEOPLE=2;
-const START_TIME_STRING="2026-10-08T14:10:00";
-const EVENT_ID="HoatDong_13";
-
-const menu=document.getElementById("menu");
-const overlay=document.getElementById("overlay");
-const pages=document.querySelectorAll(".page");
-const menuItems=document.querySelectorAll(".menu-item");
-const statusEl=document.getElementById("status");
-const countdown=document.getElementById("countdown");
-const countdownLabel=document.getElementById("countdownLabel");
-const countEl=document.getElementById("count");
-const listEl=document.getElementById("registrationList");
-const registerBtn=document.getElementById("registerBtn");
-const message=document.getElementById("message");
-const nameInput=document.getElementById("name");
-const studentIdInput=document.getElementById("studentId");
-const startText=document.getElementById("startText");
-
-document.getElementById("maxText").textContent=MAX_PEOPLE;
-
-const startTime=new Date(START_TIME_STRING).getTime();
-startText.textContent=new Date(startTime).toLocaleString("vi-VN");
-
-function openMenu(){menu.classList.add("open");overlay.classList.add("show")}
-function closeMenu(){menu.classList.remove("open");overlay.classList.remove("show")}
-function showPage(id){
- pages.forEach(p=>p.classList.toggle("active",p.id===id));
- menuItems.forEach(i=>i.classList.toggle("active",i.dataset.page===id));
- closeMenu();
- window.scrollTo({top:0,behavior:"smooth"});
- if(id==="activity")sync();
-}
-
-document.getElementById("menuBtn").onclick=openMenu;
-document.getElementById("menuClose").onclick=closeMenu;
-overlay.onclick=closeMenu;
-menuItems.forEach(i=>i.onclick=()=>showPage(i.dataset.page));
-document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>showPage(b.dataset.go));
-
-function setMessage(text,type){
- message.textContent=text;
- message.className="message show "+type;
-}
-
-function updateStatus(count){
- countEl.textContent=count;
- if(count>=MAX_PEOPLE){
-  statusEl.textContent="● ĐÃ ĐỦ SỐ LƯỢNG";
-  statusEl.className="status closed";
-  registerBtn.disabled=true;
-  countdownLabel.textContent="HOẠT ĐỘNG ĐÃ ĐỦ NGƯỜI";
-  countdown.textContent="ĐÃ ĐỦ";
-  return;
- }
- if(Date.now()<startTime){
-  statusEl.textContent="● CHƯA MỞ ĐĂNG KÝ";
-  statusEl.className="status waiting";
-  registerBtn.disabled=true;
- }else{
-  statusEl.textContent="● ĐANG MỞ ĐĂNG KÝ";
-  statusEl.className="status";
-  registerBtn.disabled=false;
- }
-}
-
-function updateCountdown(){
- const diff=startTime-Date.now();
- if(diff<=0){
-  countdownLabel.textContent="ĐĂNG KÝ ĐANG MỞ";
-  countdown.textContent="00:00:00";
-  if(Number(countEl.textContent)<MAX_PEOPLE){
-   statusEl.textContent="● ĐANG MỞ ĐĂNG KÝ";
-   statusEl.className="status";
-   registerBtn.disabled=false;
-  }
-  return;
- }
- const s=Math.floor(diff/1000);
- const h=Math.floor(s/3600);
- const m=Math.floor((s%3600)/60);
- const sec=s%60;
- countdownLabel.textContent="ĐĂNG KÝ SẼ MỞ SAU";
- countdown.textContent=[h,m,sec].map(v=>String(v).padStart(2,"0")).join(":");
- registerBtn.disabled=true;
-}
-setInterval(updateCountdown,1000);
-updateCountdown();
-
-async function sync(){
- try{
-  const res=await fetch(SCRIPT_URL+"?event="+encodeURIComponent(EVENT_ID)+"&t="+Date.now());
-  if(!res.ok)throw new Error();
-  const data=await res.json();
-  const list=data.registrations||[];
-  countEl.textContent=data.count||list.length;
-  updateStatus(data.count||list.length);
-  listEl.innerHTML="";
-  if(!list.length){
-   listEl.innerHTML='<tr><td colspan="4" class="empty">Chưa có người đăng ký.</td></tr>';
-   return;
-  }
-  list.forEach((r,i)=>{
-   const tr=document.createElement("tr");
-   tr.innerHTML="<td>"+(i+1)+"</td><td>"+escapeHtml(r.name)+"</td><td>"+escapeHtml(r.studentId)+"</td><td>"+escapeHtml(r.time||"")+"</td>";
-   listEl.appendChild(tr);
-  });
- }catch(e){
-  listEl.innerHTML='<tr><td colspan="4" class="empty">Không thể tải danh sách. Vui lòng thử lại.</td></tr>';
- }
-}
-
-function escapeHtml(v){
- return String(v).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
-}
-
-registerBtn.onclick=async()=>{
- const name=nameInput.value.trim();
- const studentId=studentIdInput.value.trim();
-
- if(!name){setMessage("Vui lòng nhập họ và tên.","error");nameInput.focus();return}
- if(!studentId){setMessage("Vui lòng nhập mã số sinh viên.","error");studentIdInput.focus();return}
- if(Date.now()<startTime){setMessage("Chưa đến thời gian mở đăng ký.","error");return}
- if(Number(countEl.textContent)>=MAX_PEOPLE){setMessage("Hoạt động đã đủ số lượng.","error");return}
-
- registerBtn.disabled=true;
- registerBtn.textContent="ĐANG GỬI...";
- setMessage("Đang xử lý đăng ký...","success");
-
- const fd=new FormData();
- fd.append("event",EVENT_ID);
- fd.append("name",name);
- fd.append("studentId",studentId);
- fd.append("time",new Date().toLocaleString("vi-VN"));
- fd.append("maxLimit",MAX_PEOPLE);
-
- try{
-  const res=await fetch(SCRIPT_URL,{method:"POST",body:fd});
-  const data=await res.json();
-
-  if(data.status==="success"){
-   setMessage("Đăng ký thành công!","success");
-   nameInput.value="";
-   studentIdInput.value="";
-   await sync();
-  }else if(data.status==="duplicate"){
-   setMessage("MSSV này đã đăng ký hoạt động này trước đó.","error");
-   await sync();
-  }else if(data.status==="full"){
-   setMessage("Hoạt động đã đủ số lượng.","error");
-   await sync();
-  }else{
-   setMessage(data.message||"Không thể đăng ký. Vui lòng thử lại.","error");
-  }
- }catch(e){
-  setMessage("Không thể kết nối hệ thống. Vui lòng thử lại.","error");
- }finally{
-  registerBtn.textContent="ĐĂNG KÝ THAM GIA";
-  if(Number(countEl.textContent)<MAX_PEOPLE&&Date.now()>=startTime)registerBtn.disabled=false;
- }
-};
-
-sync();
-</script>
+<script src="js/config.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
