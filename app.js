@@ -60,34 +60,44 @@ function setMessage(text,type){
 function updateStatus(count){
     countEl.textContent=count;
 
-    const metaBox = document.querySelector(".meta");
-    const countdownBox = document.querySelector(".countdown-box");
-    const formBox = document.querySelector(".form-box");
-    const regTitle = document.querySelector(".reg-title");
-    const tableWrap = document.querySelector(".table-wrap");
+    const activityCard = document.querySelector(".activity-card");
+    let closedBanner = document.getElementById("closedBanner");
 
     // Kiểm tra nếu hệ thống thủ công đang đóng / chưa có hoạt động
     if (typeof isRegistrationActive !== 'undefined' && !isRegistrationActive) {
-        statusEl.textContent = "● CHƯA CÓ HOẠT ĐỘNG";
-        statusEl.className = "status closed";
-        
-        // Ẩn các thành phần không cần thiết khi chưa có hoạt động
-        if(metaBox) metaBox.style.display = "none";
-        if(countdownBox) countdownBox.style.display = "none";
-        if(formBox) formBox.style.display = "none";
-        if(regTitle) regTitle.style.display = "none";
-        if(tableWrap) tableWrap.style.display = "none";
+        // Ẩn toàn bộ nội dung con bên trong thẻ hoạt động
+        if(activityCard) {
+            Array.from(activityCard.children).forEach(child => {
+                child.style.display = "none";
+            });
 
-        setMessage(typeof CLOSED_MESSAGE !== 'undefined' ? CLOSED_MESSAGE : "Hiện tại chưa có hoạt động nào mở đăng ký.", "error");
+            // Tạo hoặc hiển thị thông báo bắt mắt
+            if(!closedBanner) {
+                closedBanner = document.createElement("div");
+                closedBanner.id = "closedBanner";
+                closedBanner.style.cssText = "text-align:center; padding:50px 20px; color:#720000;";
+                closedBanner.innerHTML = `
+                    <div style="font-size:26px; font-weight:bold; letter-spacing:1.5px; margin-bottom:12px; color:#720000; text-transform:uppercase;">
+                        CHƯA CÓ HOẠT ĐỘNG ĐỂ ĐĂNG KÝ
+                    </div>
+                    <div style="font-size:16px; color:#806d5b; font-style:italic;">
+                        Vui lòng quay lại sau
+                    </div>
+                `;
+                activityCard.appendChild(closedBanner);
+            } else {
+                closedBanner.style.display = "block";
+            }
+        }
         return;
     } else {
-        // Hiện lại nếu bật hoạt động
-        if(metaBox) metaBox.style.display = "flex";
-        if(countdownBox) countdownBox.style.display = "block";
-        if(formBox) formBox.style.display = "block";
-        if(regTitle) regTitle.style.display = "block";
-        if(tableWrap) tableWrap.style.display = "block";
-        if(message) message.className = "message";
+        // Nếu bật lại, hiển thị lại các thành phần bên trong card
+        if(activityCard) {
+            Array.from(activityCard.children).forEach(child => {
+                if(child.id !== "closedBanner") child.style.display = "";
+            });
+            if(closedBanner) closedBanner.style.display = "none";
+        }
     }
 
     if(count>=MAX_PEOPLE){
@@ -184,10 +194,7 @@ function escapeHtml(v){
 
 if(registerBtn) {
     registerBtn.onclick=async()=>{
-        if (typeof isRegistrationActive !== 'undefined' && !isRegistrationActive) {
-            setMessage(typeof CLOSED_MESSAGE !== 'undefined' ? CLOSED_MESSAGE : "Hiện tại chưa có hoạt động nào mở đăng ký.", "error");
-            return;
-        }
+        if (typeof isRegistrationActive !== 'undefined' && !isRegistrationActive) return;
 
         const name=nameInput.value.trim();
         const studentId=studentIdInput.value.trim();
